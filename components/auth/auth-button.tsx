@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
-import { SignInButton } from "@/components/sign-in-button"
-import { SignOutButton } from "@/components/sign-out-button"
+import { SignInButton } from "@/components/auth/sign-in-button"
+import { SignOutButton } from "@/components/auth/sign-out-button"
 
 export async function AuthButton() {
   const supabase = await createClient()

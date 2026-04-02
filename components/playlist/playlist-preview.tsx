@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import { DUMMY_REQUESTS } from "@/constants/playlist"
-import { PlaylistCard } from "@/components/playlist-card"
+import { PlaylistCard } from "@/components/playlist/playlist-card"
 
 export function PlaylistPreview() {
   const previewRequests = DUMMY_REQUESTS.slice(0, 3)

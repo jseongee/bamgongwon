@@ -1,6 +1,6 @@
-import { Header } from "@/components/header"
-import { PlaylistBoard } from "@/components/playlist-board"
-import { Footer } from "@/components/footer"
+import { Header } from "@/components/layout/header"
+import { PlaylistBoard } from "@/components/playlist/playlist-board"
+import { Footer } from "@/components/layout/footer"
 
 export default function Page() {
   return (

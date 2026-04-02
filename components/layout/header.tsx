@@ -1,5 +1,5 @@
-import { ThemeToggle } from "@/components/theme-toggle"
-import { AuthButton } from "@/components/auth-button"
+import { ThemeToggle } from "@/components/theme/theme-toggle"
+import { AuthButton } from "@/components/auth/auth-button"
 import { Music } from "lucide-react"
 
 export function Header() {

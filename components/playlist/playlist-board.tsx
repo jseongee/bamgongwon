@@ -4,7 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { type Status } from "@/types/playlist";
 import { DUMMY_REQUESTS } from "@/constants/playlist";
-import { PlaylistCard, getStatusConfig } from "@/components/playlist-card";
+import { PlaylistCard, getStatusConfig } from "@/components/playlist/playlist-card";
 
 export function PlaylistBoard() {
   const [filter, setFilter] = useState<Status | "all">("all");
