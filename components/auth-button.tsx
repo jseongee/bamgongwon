@@ -1,0 +1,21 @@
+import { createClient } from "@/lib/supabase/server"
+import { SignInButton } from "@/components/sign-in-button"
+import { SignOutButton } from "@/components/sign-out-button"
+
+export async function AuthButton() {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (user) {
+    return (
+      <div className="flex items-center gap-2">
+        <span className="text-xs text-muted-foreground">{user.email}</span>
+        <SignOutButton />
+      </div>
+    )
+  }
+
+  return <SignInButton />
+}
