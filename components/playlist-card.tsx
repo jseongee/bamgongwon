@@ -38,7 +38,7 @@ export function PlaylistCard({ request }: { request: PlaylistRequest }) {
       <div className="flex items-center justify-between border-t border-border/50 pt-3">
         <div className="flex items-center gap-1.5">
           <div className="size-5 rounded-full bg-muted flex items-center justify-center text-[10px] text-muted-foreground font-semibold">
-            {request.requester[3]}
+            {request.requester[4]}
           </div>
           <span className="text-xs text-muted-foreground">
             {request.requester}
@@ -65,13 +65,13 @@ export function getStatusConfig(status: Status) {
         label: "제작 중",
         icon: Loader2,
         className:
-          "text-blue-400 bg-blue-400/10 border-blue-400/20 [&_svg]:animate-spin",
+          "text-red-400 bg-red-400/10 border-red-400/20 [&_svg]:animate-spin",
       };
     case "adopted":
       return {
         label: "채택됨",
         icon: Star,
-        className: "text-violet-400 bg-violet-400/10 border-violet-400/20",
+        className: "text-amber-400 bg-amber-400/10 border-amber-400/20",
       };
   }
 }
