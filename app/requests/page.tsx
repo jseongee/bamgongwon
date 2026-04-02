@@ -1,6 +1,5 @@
 import { Header } from "@/components/header"
-import { HeroSection } from "@/components/hero-section"
-import { PlaylistPreview } from "@/components/playlist-preview"
+import { PlaylistBoard } from "@/components/playlist-board"
 import { Footer } from "@/components/footer"
 
 export default function Page() {
@@ -8,8 +7,7 @@ export default function Page() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
-        <HeroSection />
-        <PlaylistPreview />
+        <PlaylistBoard />
       </main>
       <Footer />
     </div>
