@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Music, LogIn } from "lucide-react";
 
 export function Header() {
@@ -13,11 +14,14 @@ export function Header() {
           <span className="text-base font-semibold tracking-tight">밤공원</span>
         </div>
 
-        {/* 로그인 버튼 */}
-        <Button variant="outline" size="sm" className="gap-2">
-          <LogIn className="size-3.5" />
-          Google로 로그인
-        </Button>
+        {/* 우측 버튼 그룹 */}
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button variant="outline" size="sm" className="gap-2">
+            <LogIn className="size-3.5" />
+            Google로 로그인
+          </Button>
+        </div>
       </div>
     </header>
   );

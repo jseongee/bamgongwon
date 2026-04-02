@@ -5,15 +5,13 @@ import { Footer } from "@/components/footer"
 
 export default function Page() {
   return (
-    <div className="dark">
-      <div className="min-h-screen bg-background text-foreground">
-        <Header />
-        <main>
-          <HeroSection />
-          <PlaylistBoard />
-        </main>
-        <Footer />
-      </div>
+    <div className="min-h-screen bg-background text-foreground">
+      <Header />
+      <main>
+        <HeroSection />
+        <PlaylistBoard />
+      </main>
+      <Footer />
     </div>
   )
 }
