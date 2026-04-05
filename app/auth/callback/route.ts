@@ -5,7 +5,9 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get("code")
 
-  const response = NextResponse.redirect(origin)
+  const next = searchParams.get("next")
+  const redirectUrl = next?.startsWith("/") ? `${origin}${next}` : origin
+  const response = NextResponse.redirect(redirectUrl)
 
   if (code) {
     const supabase = createServerClient(

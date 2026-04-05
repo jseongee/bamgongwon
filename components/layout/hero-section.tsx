@@ -1,8 +1,14 @@
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ListMusic, SquarePlay } from "lucide-react"
+import { SquarePlay } from "lucide-react"
+import { createClient } from "@/lib/supabase/server"
+import { RequestButton } from "@/components/layout/request-button"
 
-export function HeroSection() {
+export async function HeroSection() {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   return (
     <section className="relative overflow-hidden border-b border-border/50 py-20 sm:py-28">
       {/* 배경 장식 */}
@@ -35,12 +41,7 @@ export function HeroSection() {
         {/* CTA 버튼 */}
         <div className="mt-8 flex flex-col items-center gap-3">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Button asChild size="lg" className="gap-2 px-6">
-              <Link href="/requests/new">
-                <ListMusic className="size-4" />
-                플레이리스트 신청하기
-              </Link>
-            </Button>
+            <RequestButton isLoggedIn={!!user} />
             <Button asChild size="lg" variant="outline" className="gap-2 px-6">
               <a
                 href="http://youtube.com/@밤공원?sub_confirmation=1"
