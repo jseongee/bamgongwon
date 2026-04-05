@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { ThemeToggle } from "@/components/theme/theme-toggle"
 import { AuthButton } from "@/components/auth/auth-button"
 import { Button } from "@/components/ui/button"
 import { Music, SquarePlay } from "lucide-react"
@@ -32,7 +31,6 @@ export function Header() {
               <SquarePlay className="size-4" />
             </a>
           </Button>
-          <ThemeToggle />
           <AuthButton />
         </div>
       </div>
