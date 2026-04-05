@@ -28,9 +28,14 @@
 
 ## 폴더 구조
 ```
-app/           # 페이지 및 라우트 핸들러
-components/    # UI 컴포넌트 (파일명 = 컴포넌트명)
-constants/     # 더미 데이터 등 상수
-lib/supabase/  # 브라우저/서버 Supabase 클라이언트
-types/         # TypeScript 타입 정의
+app/                    # 페이지 및 라우트 핸들러
+components/
+├── auth/               # 인증 관련 (auth-button, sign-in-button, sign-out-button)
+├── layout/             # 레이아웃 (header, footer, hero-section)
+├── playlist/           # 플레이리스트 (playlist-board, playlist-card, playlist-preview)
+├── theme/              # 테마 (theme-provider, theme-toggle)
+└── ui/                 # shadcn/ui 기본 컴포넌트
+constants/              # 더미 데이터 등 상수
+lib/supabase/           # 브라우저/서버 Supabase 클라이언트
+types/                  # TypeScript 타입 정의
 ```
