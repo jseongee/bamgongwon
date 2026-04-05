@@ -34,7 +34,7 @@ app/                    # 페이지 및 라우트 핸들러
 components/
 ├── auth/               # 인증 관련 (auth-button, sign-in-button, sign-out-button)
 ├── layout/             # 레이아웃 (header, footer, hero-section, request-button)
-├── playlist/           # 플레이리스트 (playlist-board, playlist-card, playlist-preview, request-form)
+├── playlist/           # 플레이리스트 (playlist-board, playlist-card, playlist-preview, request-form, request-actions, request-edit-dialog, request-delete-dialog)
 ├── theme/              # 테마 (theme-provider, theme-toggle)
 └── ui/                 # shadcn/ui 기본 컴포넌트
 lib/
