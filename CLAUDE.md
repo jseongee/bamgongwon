@@ -37,6 +37,11 @@ components/
 ├── playlist/           # 플레이리스트 (playlist-board, playlist-card, playlist-preview, request-form)
 ├── theme/              # 테마 (theme-provider, theme-toggle)
 └── ui/                 # shadcn/ui 기본 컴포넌트
-lib/supabase/           # 브라우저/서버 Supabase 클라이언트
+lib/
+├── auth.ts             # Google OAuth 로그인 유틸 (signInWithGoogle)
+└── supabase/           # Supabase 클라이언트 및 유틸
+    ├── client.ts       # 브라우저 클라이언트
+    ├── server.ts       # 서버 클라이언트
+    └── queries.ts      # DB 조회 함수 (fetchPlaylistRequests)
 types/                  # TypeScript 타입 정의
 ```
