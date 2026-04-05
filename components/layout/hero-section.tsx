@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ListMusic } from "lucide-react";
 
@@ -33,9 +34,11 @@ export function HeroSection() {
 
         {/* CTA 버튼 */}
         <div className="mt-8 flex flex-col items-center gap-3">
-          <Button size="lg" className="gap-2 px-6">
-            <ListMusic className="size-4" />
-            플레이리스트 신청하기
+          <Button asChild size="lg" className="gap-2 px-6">
+            <Link href="/requests/new">
+              <ListMusic className="size-4" />
+              플레이리스트 신청하기
+            </Link>
           </Button>
           <p className="text-xs text-muted-foreground">
             * 구글 로그인 및 채널 구독 확인 후 신청 가능합니다.
