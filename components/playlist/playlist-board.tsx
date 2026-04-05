@@ -2,17 +2,16 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { type Status } from "@/types/playlist";
-import { DUMMY_REQUESTS } from "@/constants/playlist";
+import { type Status, type PlaylistRequest } from "@/types/playlist";
 import { PlaylistCard, getStatusConfig } from "@/components/playlist/playlist-card";
 
-export function PlaylistBoard() {
+export function PlaylistBoard({ requests }: { requests: PlaylistRequest[] }) {
   const [filter, setFilter] = useState<Status | "all">("all");
 
   const filteredRequests =
     filter === "all"
-      ? DUMMY_REQUESTS
-      : DUMMY_REQUESTS.filter((r) => r.status === filter);
+      ? requests
+      : requests.filter((r) => r.status === filter);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -21,7 +20,7 @@ export function PlaylistBoard() {
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">신청 현황</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            총 {DUMMY_REQUESTS.length}개의 신청이 있습니다.
+            총 {requests.length}개의 신청이 있습니다.
           </p>
         </div>
 

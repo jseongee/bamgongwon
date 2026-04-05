@@ -1,11 +1,9 @@
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
-import { DUMMY_REQUESTS } from "@/constants/playlist"
+import { type PlaylistRequest } from "@/types/playlist"
 import { PlaylistCard } from "@/components/playlist/playlist-card"
 
-export function PlaylistPreview() {
-  const previewRequests = DUMMY_REQUESTS.slice(0, 3)
-
+export function PlaylistPreview({ requests }: { requests: PlaylistRequest[] }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       {/* 섹션 헤더 */}
@@ -13,7 +11,7 @@ export function PlaylistPreview() {
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">신청 현황</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            총 {DUMMY_REQUESTS.length}개의 신청이 있습니다.
+            최근 신청 {requests.length}건
           </p>
         </div>
         <Link
@@ -27,7 +25,7 @@ export function PlaylistPreview() {
 
       {/* 카드 그리드 */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {previewRequests.map((request) => (
+        {requests.map((request) => (
           <PlaylistCard key={request.id} request={request} />
         ))}
       </div>

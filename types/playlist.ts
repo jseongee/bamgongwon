@@ -5,6 +5,6 @@ export interface PlaylistRequest {
   requester: string
   title: string
   description: string
-  requestedAt: string
+  requested_at: string
   status: Status
 }

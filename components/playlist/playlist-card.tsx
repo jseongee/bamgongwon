@@ -38,14 +38,18 @@ export function PlaylistCard({ request }: { request: PlaylistRequest }) {
       <div className="flex items-center justify-between border-t border-border/50 pt-3">
         <div className="flex items-center gap-1.5">
           <div className="size-5 rounded-full bg-muted flex items-center justify-center text-[10px] text-muted-foreground font-semibold">
-            {request.requester[4]}
+            {request.requester[0].toUpperCase()}
           </div>
           <span className="text-xs text-muted-foreground">
             {request.requester}
           </span>
         </div>
         <span className="text-xs text-muted-foreground">
-          {request.requestedAt}
+          {new Date(request.requested_at).toLocaleDateString("ko-KR", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
         </span>
       </div>
     </div>
