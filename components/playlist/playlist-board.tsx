@@ -1,17 +1,18 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { type Status, type PlaylistRequest } from "@/types/playlist";
-import { PlaylistCard, getStatusConfig } from "@/components/playlist/playlist-card";
+import { useState } from "react"
+import { cn } from "@/lib/utils"
+import { type Status, type PlaylistRequest } from "@/types/playlist"
+import {
+  PlaylistCard,
+  getStatusConfig,
+} from "@/components/playlist/playlist-card"
 
 export function PlaylistBoard({ requests }: { requests: PlaylistRequest[] }) {
-  const [filter, setFilter] = useState<Status | "all">("all");
+  const [filter, setFilter] = useState<Status | "all">("all")
 
   const filteredRequests =
-    filter === "all"
-      ? requests
-      : requests.filter((r) => r.status === filter);
+    filter === "all" ? requests : requests.filter((r) => r.status === filter)
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -26,22 +27,22 @@ export function PlaylistBoard({ requests }: { requests: PlaylistRequest[] }) {
 
         {/* 필터 탭 */}
         <div className="flex items-center gap-1.5 rounded-lg border border-border bg-muted/30 p-1 w-fit">
-          {(["all", "adopted", "in_progress", "completed"] as const).map(
-            (f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={cn(
-                  "rounded-md px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap",
-                  filter === f
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {f === "all" ? "전체" : getStatusConfig(f).label}
-              </button>
-            ),
-          )}
+          {(
+            ["all", "pending", "adopted", "in_progress", "completed"] as const
+          ).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={cn(
+                "rounded-md px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap",
+                filter === f
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {f === "all" ? "전체" : getStatusConfig(f).label}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -52,5 +53,5 @@ export function PlaylistBoard({ requests }: { requests: PlaylistRequest[] }) {
         ))}
       </div>
     </section>
-  );
+  )
 }

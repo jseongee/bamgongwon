@@ -4,7 +4,7 @@ import { useActionState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { submitRequest } from "@/app/actions/request"
 import { Button } from "@/components/ui/button"
-import { Loader2 } from "lucide-react"
+import { Info, Loader2 } from "lucide-react"
 
 const initialState = { error: null }
 
@@ -31,9 +31,13 @@ export function RequestForm({ userEmail }: { userEmail: string }) {
         <h1 className="text-2xl font-semibold tracking-tight">
           플레이리스트 신청
         </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {userEmail} 계정으로 신청합니다.
-        </p>
+        <div className="mt-3 flex items-start gap-2 rounded-lg border border-border bg-muted/30 px-3 py-2.5 text-sm text-muted-foreground">
+          <Info className="mt-0.5 size-4 shrink-0" />
+          <p>
+            플레이리스트 신청은 검토 후 채택 여부가 결정되며, 모든 신청 건이
+            채택되지는 않습니다.
+          </p>
+        </div>
       </div>
 
       {/* 폼 */}

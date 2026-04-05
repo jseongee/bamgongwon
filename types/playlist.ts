@@ -1,4 +1,4 @@
-export type Status = "completed" | "in_progress" | "adopted"
+export type Status = "pending" | "completed" | "in_progress" | "adopted"
 
 export interface PlaylistRequest {
   id: number
