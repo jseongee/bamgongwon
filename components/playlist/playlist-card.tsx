@@ -1,10 +1,18 @@
 import { cn } from "@/lib/utils"
 import { CheckCircle2, Clock, Loader2, Music, Star } from "lucide-react"
 import { type Status, type PlaylistRequest } from "@/types/playlist"
+import { RequestActions } from "@/components/playlist/request-actions"
 
-export function PlaylistCard({ request }: { request: PlaylistRequest }) {
+export function PlaylistCard({
+  request,
+  currentUserEmail,
+}: {
+  request: PlaylistRequest
+  currentUserEmail?: string
+}) {
   const statusConfig = getStatusConfig(request.status)
   const StatusIcon = statusConfig.icon
+  const isOwner = !!currentUserEmail && currentUserEmail === request.requester
 
   return (
     <div className="group relative flex flex-col gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-border/80 hover:bg-card/80">
@@ -34,7 +42,7 @@ export function PlaylistCard({ request }: { request: PlaylistRequest }) {
         </p>
       </div>
 
-      {/* 하단: 신청자 + 날짜 */}
+      {/* 하단: 신청자 + 날짜 + 수정/삭제 버튼 */}
       <div className="flex items-center justify-between border-t border-border/50 pt-3">
         <div className="flex items-center gap-1.5">
           <div className="size-5 rounded-full bg-muted flex items-center justify-center text-[10px] text-muted-foreground font-semibold">
@@ -44,13 +52,22 @@ export function PlaylistCard({ request }: { request: PlaylistRequest }) {
             {request.requester}
           </span>
         </div>
-        <span className="text-xs text-muted-foreground">
-          {new Date(request.requested_at).toLocaleDateString("ko-KR", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          })}
-        </span>
+        <div className="flex items-center gap-2">
+          {isOwner && (
+            <RequestActions
+              requestId={request.id}
+              initialTitle={request.title}
+              initialDescription={request.description}
+            />
+          )}
+          <span className="text-xs text-muted-foreground">
+            {new Date(request.requested_at).toLocaleDateString("ko-KR", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
+          </span>
+        </div>
       </div>
     </div>
   )

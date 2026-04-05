@@ -8,7 +8,13 @@ import {
   getStatusConfig,
 } from "@/components/playlist/playlist-card"
 
-export function PlaylistBoard({ requests }: { requests: PlaylistRequest[] }) {
+export function PlaylistBoard({
+  requests,
+  currentUserEmail,
+}: {
+  requests: PlaylistRequest[]
+  currentUserEmail?: string
+}) {
   const [filter, setFilter] = useState<Status | "all">("all")
 
   const filteredRequests =
@@ -49,7 +55,11 @@ export function PlaylistBoard({ requests }: { requests: PlaylistRequest[] }) {
       {/* 카드 그리드 */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {filteredRequests.map((request) => (
-          <PlaylistCard key={request.id} request={request} />
+          <PlaylistCard
+            key={request.id}
+            request={request}
+            currentUserEmail={currentUserEmail}
+          />
         ))}
       </div>
     </section>

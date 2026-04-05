@@ -17,3 +17,11 @@ export async function fetchPlaylistRequests(
   const { data } = await query
   return data ?? []
 }
+
+export async function fetchCurrentUserEmail(): Promise<string | null> {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  return user?.email ?? null
+}

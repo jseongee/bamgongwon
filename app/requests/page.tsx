@@ -1,12 +1,21 @@
-import { fetchPlaylistRequests } from "@/lib/supabase/queries"
+import {
+  fetchPlaylistRequests,
+  fetchCurrentUserEmail,
+} from "@/lib/supabase/queries"
 import { PlaylistBoard } from "@/components/playlist/playlist-board"
 
 export default async function Page() {
-  const requests = await fetchPlaylistRequests()
+  const [requests, currentUserEmail] = await Promise.all([
+    fetchPlaylistRequests(),
+    fetchCurrentUserEmail(),
+  ])
 
   return (
     <main>
-      <PlaylistBoard requests={requests} />
+      <PlaylistBoard
+        requests={requests}
+        currentUserEmail={currentUserEmail ?? undefined}
+      />
     </main>
   )
 }

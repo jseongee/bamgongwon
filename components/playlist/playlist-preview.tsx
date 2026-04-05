@@ -3,7 +3,13 @@ import { ChevronRight } from "lucide-react"
 import { type PlaylistRequest } from "@/types/playlist"
 import { PlaylistCard } from "@/components/playlist/playlist-card"
 
-export function PlaylistPreview({ requests }: { requests: PlaylistRequest[] }) {
+export function PlaylistPreview({
+  requests,
+  currentUserEmail,
+}: {
+  requests: PlaylistRequest[]
+  currentUserEmail?: string
+}) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       {/* 섹션 헤더 */}
@@ -26,7 +32,11 @@ export function PlaylistPreview({ requests }: { requests: PlaylistRequest[] }) {
       {/* 카드 그리드 */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {requests.map((request) => (
-          <PlaylistCard key={request.id} request={request} />
+          <PlaylistCard
+            key={request.id}
+            request={request}
+            currentUserEmail={currentUserEmail}
+          />
         ))}
       </div>
     </section>
