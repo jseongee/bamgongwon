@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme/theme-toggle"
 import { AuthButton } from "@/components/auth/auth-button"
-import { Music } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Music, SquarePlay } from "lucide-react"
 
 export function Header() {
   return (
@@ -17,6 +18,20 @@ export function Header() {
 
         {/* 우측 버튼 그룹 */}
         <div className="flex items-center gap-2">
+          <Button
+            asChild
+            variant="ghost"
+            size="icon"
+            aria-label="YouTube 채널 바로가기"
+          >
+            <a
+              href="http://youtube.com/@밤공원?sub_confirmation=1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SquarePlay className="size-4" />
+            </a>
+          </Button>
           <ThemeToggle />
           <AuthButton />
         </div>

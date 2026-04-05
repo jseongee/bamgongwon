@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ListMusic } from "lucide-react";
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { ListMusic, SquarePlay } from "lucide-react"
 
 export function HeroSection() {
   return (
@@ -34,17 +34,29 @@ export function HeroSection() {
 
         {/* CTA 버튼 */}
         <div className="mt-8 flex flex-col items-center gap-3">
-          <Button asChild size="lg" className="gap-2 px-6">
-            <Link href="/requests/new">
-              <ListMusic className="size-4" />
-              플레이리스트 신청하기
-            </Link>
-          </Button>
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Button asChild size="lg" className="gap-2 px-6">
+              <Link href="/requests/new">
+                <ListMusic className="size-4" />
+                플레이리스트 신청하기
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="gap-2 px-6">
+              <a
+                href="http://youtube.com/@밤공원?sub_confirmation=1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SquarePlay className="size-4" />
+                채널 바로가기
+              </a>
+            </Button>
+          </div>
           <p className="text-xs text-muted-foreground">
             * 구글 로그인 및 채널 구독 확인 후 신청 가능합니다.
           </p>
         </div>
       </div>
     </section>
-  );
+  )
 }

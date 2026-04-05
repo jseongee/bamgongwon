@@ -8,7 +8,7 @@ import { Info, Loader2 } from "lucide-react"
 
 const initialState = { error: null }
 
-export function RequestForm({ userEmail }: { userEmail: string }) {
+export function RequestForm() {
   const router = useRouter()
   const [state, action, isPending] = useActionState(submitRequest, initialState)
   const hasSubmitted = useRef(false)
