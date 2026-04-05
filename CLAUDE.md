@@ -25,7 +25,7 @@
 | `/` | 메인 (히어로 + 최근 신청 3건 미리보기) |
 | `/requests` | 전체 신청 목록 (필터 탭 포함) |
 | `/requests/new` | 플레이리스트 신청 폼 (로그인 필요, 미로그인 시 `/` 리다이렉트) |
-| `/auth/callback` | Google OAuth 콜백 처리 |
+| `/auth/callback` | Google OAuth 콜백 처리 (`?next=` 파라미터로 로그인 후 이동 경로 지정 가능) |
 
 ## 폴더 구조
 ```
@@ -33,7 +33,7 @@ app/                    # 페이지 및 라우트 핸들러
 ├── actions/            # Server Actions (request.ts)
 components/
 ├── auth/               # 인증 관련 (auth-button, sign-in-button, sign-out-button)
-├── layout/             # 레이아웃 (header, footer, hero-section)
+├── layout/             # 레이아웃 (header, footer, hero-section, request-button)
 ├── playlist/           # 플레이리스트 (playlist-board, playlist-card, playlist-preview, request-form)
 ├── theme/              # 테마 (theme-provider, theme-toggle)
 └── ui/                 # shadcn/ui 기본 컴포넌트
