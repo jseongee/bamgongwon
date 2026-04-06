@@ -8,6 +8,7 @@
 
 ## 주요 기능
 - 플레이리스트 신청 목록 조회 및 상태 필터링 (`/requests`)
+- 신청 상세 페이지 조회 (`/requests/[id]`)
 - Google OAuth 로그인 (Supabase Auth)
 - 로그인한 사용자만 신청 폼 접근 가능 (`/requests/new`)
 - 신청 건 좋아요/취소 (로그인 필요, 본인 신청 건 제외)
@@ -25,6 +26,7 @@
 |------|------|
 | `/` | 메인 (히어로 + 최근 신청 3건 미리보기) |
 | `/requests` | 전체 신청 목록 (필터 탭 포함) |
+| `/requests/[id]` | 신청 상세 페이지 (전체 내용, 좋아요, 수정/삭제) |
 | `/requests/new` | 플레이리스트 신청 폼 (로그인 필요, 미로그인 시 `/` 리다이렉트) |
 | `/auth/callback` | Google OAuth 콜백 처리 (`?next=` 파라미터로 로그인 후 이동 경로 지정 가능) |
 
@@ -32,6 +34,7 @@
 ```
 app/                    # 페이지 및 라우트 핸들러
 ├── actions/            # Server Actions (request.ts)
+├── requests/[id]/      # 신청 상세 페이지 (page.tsx, not-found.tsx)
 components/
 ├── auth/               # 인증 관련 (auth-button, sign-in-button, sign-out-button)
 ├── layout/             # 레이아웃 (header, footer, hero-section, request-button)
@@ -43,6 +46,6 @@ lib/
 └── supabase/           # Supabase 클라이언트 및 유틸
     ├── client.ts       # 브라우저 클라이언트
     ├── server.ts       # 서버 클라이언트
-    └── queries.ts      # DB 조회 함수 (fetchPlaylistRequests)
+    └── queries.ts      # DB 조회 함수 (fetchPlaylistRequests, fetchPlaylistRequestById)
 types/                  # TypeScript 타입 정의
 ```

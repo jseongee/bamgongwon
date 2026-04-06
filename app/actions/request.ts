@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 
 export async function submitRequest(
   _prevState: { error: string | null },
@@ -88,6 +89,7 @@ export async function updateRequest(
 
   revalidatePath("/requests")
   revalidatePath("/")
+  revalidatePath(`/requests/${id}`)
 
   return { error: null }
 }
@@ -154,8 +156,5 @@ export async function deleteRequest(
     return { error: "삭제 권한이 없거나 존재하지 않는 신청입니다." }
   }
 
-  revalidatePath("/requests")
-  revalidatePath("/")
-
-  return { error: null }
+  redirect("/requests")
 }

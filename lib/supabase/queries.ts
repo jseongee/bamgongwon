@@ -42,6 +42,38 @@ export async function fetchPlaylistRequests(
   })) as PlaylistRequest[]
 }
 
+export async function fetchPlaylistRequestById(
+  id: number,
+): Promise<PlaylistRequest | null> {
+  const supabase = await createClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  const userEmail = user?.email
+
+  const { data, error } = await supabase
+    .from("playlist_requests")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+  if (error || !data) return null
+
+  let isLiked = false
+  if (userEmail) {
+    const { data: like } = await supabase
+      .from("playlist_likes")
+      .select("id")
+      .eq("request_id", id)
+      .eq("user_email", userEmail)
+      .single()
+    isLiked = !!like
+  }
+
+  return { ...data, is_liked: isLiked } as PlaylistRequest
+}
+
 export async function fetchUserEmail(): Promise<string | null> {
   const supabase = await createClient()
   const {

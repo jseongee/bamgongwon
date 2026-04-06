@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { CheckCircle2, Clock, Loader2, Star } from "lucide-react"
 import { type Status, type PlaylistRequest } from "@/types/playlist"
@@ -37,14 +38,14 @@ export function PlaylistCard({
       </div>
 
       {/* 제목 + 설명 */}
-      <div className="flex-1">
-        <h3 className="font-medium leading-snug text-foreground line-clamp-2">
+      <Link href={`/requests/${request.id}`} className="flex-1 group/link">
+        <h3 className="font-medium leading-snug text-foreground line-clamp-2 group-hover/link:underline underline-offset-2">
           {request.title}
         </h3>
         <p className="mt-1 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
           {request.description}
         </p>
-      </div>
+      </Link>
 
       {/* 하단: 신청자 + 날짜 + 수정/삭제 버튼 */}
       <div className="flex items-center justify-between border-t border-border/50 pt-3">
