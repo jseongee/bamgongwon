@@ -20,7 +20,7 @@ export async function HeroSection() {
         {/* 뱃지 */}
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
           <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          구독자 전용 플레이리스트 신청
+          플레이리스트 신청
         </div>
 
         {/* 제목 */}
@@ -34,8 +34,10 @@ export async function HeroSection() {
 
         {/* 설명 */}
         <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground sm:text-lg leading-relaxed">
-          채널 구독자라면 누구나 원하는 분위기의 플레이리스트 제작을 신청할 수
-          있습니다. 신청된 목록은 실시간으로 확인 가능합니다.
+          원하는 분위기의 플레이리스트 제작을 신청할 수 있습니다.
+        </p>
+        <p className="mx-auto max-w-xl text-base text-muted-foreground sm:text-lg leading-relaxed">
+          신청된 목록은 실시간으로 확인 가능합니다.
         </p>
 
         {/* CTA 버튼 */}
@@ -54,7 +56,7 @@ export async function HeroSection() {
             </Button>
           </div>
           <p className="text-xs text-muted-foreground">
-            * 구글 로그인 및 채널 구독 확인 후 신청 가능합니다.
+            * 구글 로그인 후 신청 가능합니다.
           </p>
         </div>
       </div>

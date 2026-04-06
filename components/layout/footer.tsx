@@ -11,9 +11,6 @@ export function Footer() {
             © {new Date().getFullYear()} 밤공원. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
-            <p className="text-xs text-muted-foreground">
-              플레이리스트 신청은 채널 구독자만 가능합니다.
-            </p>
             <ThemeToggle />
           </div>
         </div>
