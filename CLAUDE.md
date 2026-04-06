@@ -10,6 +10,7 @@
 - 플레이리스트 신청 목록 조회 및 상태 필터링 (`/requests`)
 - Google OAuth 로그인 (Supabase Auth)
 - 로그인한 사용자만 신청 폼 접근 가능 (`/requests/new`)
+- 신청 건 좋아요/취소 (로그인 필요, 본인 신청 건 제외)
 
 ## 기술 스택
 - **Next.js 16** (App Router) — `proxy.ts`가 미들웨어 역할 (Next.js 16 명칭 변경)
@@ -17,7 +18,7 @@
 - **Tailwind CSS v4** — oklch 색상, `@custom-variant dark (&:is(.dark *))`
 - **shadcn/ui** (radix-nova 스타일)
 - **next-themes** — system/dark/light 테마
-- **Supabase** (`@supabase/ssr`) — Auth + DB (`playlist_requests` 테이블)
+- **Supabase** (`@supabase/ssr`) — Auth + DB (`playlist_requests`, `playlist_likes` 테이블)
 
 ## 라우트
 | 경로 | 설명 |
@@ -34,7 +35,7 @@ app/                    # 페이지 및 라우트 핸들러
 components/
 ├── auth/               # 인증 관련 (auth-button, sign-in-button, sign-out-button)
 ├── layout/             # 레이아웃 (header, footer, hero-section, request-button)
-├── playlist/           # 플레이리스트 (playlist-board, playlist-card, playlist-preview, request-form, request-actions, request-edit-dialog, request-delete-dialog)
+├── playlist/           # 플레이리스트 (playlist-board, playlist-card, playlist-preview, request-form, request-actions, request-edit-dialog, request-delete-dialog, like-button)
 ├── theme/              # 테마 (theme-provider, theme-toggle)
 └── ui/                 # shadcn/ui 기본 컴포넌트
 lib/

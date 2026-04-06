@@ -5,6 +5,13 @@ export async function fetchPlaylistRequests(
   limit?: number,
 ): Promise<PlaylistRequest[]> {
   const supabase = await createClient()
+
+  // 현재 사용자 조회 (좋아요 여부 판단용)
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  const userEmail = user?.email
+
   let query = supabase
     .from("playlist_requests")
     .select("*")
@@ -15,10 +22,27 @@ export async function fetchPlaylistRequests(
   }
 
   const { data } = await query
-  return data ?? []
+  if (!data) return []
+
+  // 유저가 좋아요한 request_id Set 조회
+  let likedSet = new Set<number>()
+  if (userEmail) {
+    const { data: userLikes } = await supabase
+      .from("playlist_likes")
+      .select("request_id")
+      .eq("user_email", userEmail)
+    likedSet = new Set(
+      (userLikes ?? []).map((l: { request_id: number }) => l.request_id),
+    )
+  }
+
+  return (data ?? []).map((row) => ({
+    ...row,
+    is_liked: likedSet.has(row.id),
+  })) as PlaylistRequest[]
 }
 
-export async function fetchCurrentUserEmail(): Promise<string | null> {
+export async function fetchUserEmail(): Promise<string | null> {
   const supabase = await createClient()
   const {
     data: { user },

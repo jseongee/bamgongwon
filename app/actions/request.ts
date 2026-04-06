@@ -92,6 +92,41 @@ export async function updateRequest(
   return { error: null }
 }
 
+export async function toggleLike(
+  requestId: number,
+): Promise<{ error: string | null }> {
+  const supabase = await createClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user?.email) {
+    return { error: "로그인이 필요합니다." }
+  }
+
+  // 이미 좋아요했는지 확인
+  const { data: existing } = await supabase
+    .from("playlist_likes")
+    .select("id")
+    .eq("request_id", requestId)
+    .eq("user_email", user.email)
+    .single()
+
+  if (existing) {
+    await supabase.from("playlist_likes").delete().eq("id", existing.id)
+  } else {
+    await supabase
+      .from("playlist_likes")
+      .insert({ request_id: requestId, user_email: user.email })
+  }
+
+  revalidatePath("/requests")
+  revalidatePath("/")
+
+  return { error: null }
+}
+
 export async function deleteRequest(
   id: number,
 ): Promise<{ error: string | null }> {

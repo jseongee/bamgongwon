@@ -1,26 +1,24 @@
 import { cn } from "@/lib/utils"
-import { CheckCircle2, Clock, Loader2, Music, Star } from "lucide-react"
+import { CheckCircle2, Clock, Loader2, Star } from "lucide-react"
 import { type Status, type PlaylistRequest } from "@/types/playlist"
 import { RequestActions } from "@/components/playlist/request-actions"
+import { LikeButton } from "@/components/playlist/like-button"
 
 export function PlaylistCard({
   request,
-  currentUserEmail,
+  userEmail,
 }: {
   request: PlaylistRequest
-  currentUserEmail?: string
+  userEmail?: string
 }) {
   const statusConfig = getStatusConfig(request.status)
   const StatusIcon = statusConfig.icon
-  const isOwner = !!currentUserEmail && currentUserEmail === request.requester
+  const isOwner = !!userEmail && userEmail === request.requester
 
   return (
     <div className="group relative flex flex-col gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-border/80 hover:bg-card/80">
-      {/* 상단: 음악 아이콘 + 상태 뱃지 */}
+      {/* 상단: 상태 뱃지 + 좋아요 */}
       <div className="flex items-center justify-between">
-        <div className="flex size-7 items-center justify-center rounded-lg bg-muted/50 border border-border">
-          <Music className="size-3.5 text-muted-foreground" />
-        </div>
         <span
           className={cn(
             "flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs font-medium",
@@ -30,6 +28,12 @@ export function PlaylistCard({
           <StatusIcon className="size-3" />
           {statusConfig.label}
         </span>
+        <LikeButton
+          requestId={request.id}
+          initialCount={request.likes_count}
+          initialLiked={request.is_liked}
+          isLoggedIn={!!userEmail && userEmail !== request.requester}
+        />
       </div>
 
       {/* 제목 + 설명 */}

@@ -5,10 +5,10 @@ import { PlaylistCard } from "@/components/playlist/playlist-card"
 
 export function PlaylistPreview({
   requests,
-  currentUserEmail,
+  userEmail,
 }: {
   requests: PlaylistRequest[]
-  currentUserEmail?: string
+  userEmail?: string
 }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -35,7 +35,7 @@ export function PlaylistPreview({
           <PlaylistCard
             key={request.id}
             request={request}
-            currentUserEmail={currentUserEmail}
+            userEmail={userEmail}
           />
         ))}
       </div>

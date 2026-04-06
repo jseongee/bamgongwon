@@ -10,10 +10,10 @@ import {
 
 export function PlaylistBoard({
   requests,
-  currentUserEmail,
+  userEmail,
 }: {
   requests: PlaylistRequest[]
-  currentUserEmail?: string
+  userEmail?: string
 }) {
   const [filter, setFilter] = useState<Status | "all">("all")
 
@@ -58,7 +58,7 @@ export function PlaylistBoard({
           <PlaylistCard
             key={request.id}
             request={request}
-            currentUserEmail={currentUserEmail}
+            userEmail={userEmail}
           />
         ))}
       </div>

@@ -7,4 +7,6 @@ export interface PlaylistRequest {
   description: string
   requested_at: string
   status: Status
+  likes_count: number
+  is_liked: boolean
 }
