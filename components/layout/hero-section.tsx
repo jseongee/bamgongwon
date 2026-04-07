@@ -55,9 +55,11 @@ export async function HeroSection() {
               </a>
             </Button>
           </div>
-          <p className="text-xs text-muted-foreground">
-            * 구글 로그인 후 신청 가능합니다.
-          </p>
+          {!user && (
+            <p className="text-xs text-muted-foreground">
+              * 구글 로그인 후 신청 가능합니다.
+            </p>
+          )}
         </div>
       </div>
     </section>
