@@ -3,7 +3,7 @@ import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
 import { fetchPlaylistRequestById } from "@/lib/supabase/queries"
 import { getUser } from "@/lib/supabase/server"
-import { getStatusConfig } from "@/components/playlist/playlist-card"
+import { getStatusConfig } from "@/lib/status-config"
 import { LikeButton } from "@/components/playlist/like-button"
 import { RequestActions } from "@/components/playlist/request-actions"
 

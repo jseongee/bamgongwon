@@ -3,10 +3,8 @@
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { type Status, type PlaylistRequest } from "@/types/playlist"
-import {
-  PlaylistCard,
-  getStatusConfig,
-} from "@/components/playlist/playlist-card"
+import { PlaylistCard } from "@/components/playlist/playlist-card"
+import { getStatusConfig } from "@/lib/status-config"
 
 export function PlaylistBoard({
   requests,
