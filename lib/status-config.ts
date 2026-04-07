@@ -20,13 +20,13 @@ export function getStatusConfig(status: Status) {
         label: "제작 중",
         icon: Loader2,
         className:
-          "text-red-400 bg-red-400/10 border-red-400/20 [&_svg]:animate-spin",
+          "text-cyan-400 bg-cyan-400/10 border-cyan-400/20 [&_svg]:animate-spin",
       }
     case "adopted":
       return {
         label: "채택됨",
         icon: Star,
-        className: "text-amber-400 bg-amber-400/10 border-amber-400/20",
+        className: "text-fuchsia-400 bg-fuchsia-400/10 border-fuchsia-400/20",
       }
   }
 }

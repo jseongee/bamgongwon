@@ -16,7 +16,7 @@ export async function HeroSection() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 text-center">
         {/* 뱃지 */}
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
-          <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="size-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
           플레이리스트 신청
         </div>
 

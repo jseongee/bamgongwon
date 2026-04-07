@@ -48,8 +48,8 @@ export function LikeButton({
       className={cn(
         "flex items-center cursor-pointer gap-1 text-xs transition-colors",
         optimistic.liked
-          ? "text-red-400"
-          : "text-muted-foreground hover:text-red-400",
+          ? "text-fuchsia-400"
+          : "text-muted-foreground hover:text-fuchsia-400",
       )}
     >
       <Heart className={cn("size-3", optimistic.liked && "fill-current")} />

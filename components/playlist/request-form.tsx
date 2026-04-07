@@ -46,7 +46,7 @@ export function RequestForm() {
         <div className="flex flex-col gap-1.5">
           <label htmlFor="title" className="text-sm font-medium">
             제목
-            <span className="ml-1 text-red-400">*</span>
+            <span className="ml-1 text-fuchsia-400">*</span>
           </label>
           <input
             id="title"
@@ -63,7 +63,7 @@ export function RequestForm() {
         <div className="flex flex-col gap-1.5">
           <label htmlFor="description" className="text-sm font-medium">
             내용
-            <span className="ml-1 text-red-400">*</span>
+            <span className="ml-1 text-fuchsia-400">*</span>
           </label>
           <textarea
             id="description"
@@ -76,7 +76,7 @@ export function RequestForm() {
         </div>
 
         {/* 에러 메시지 */}
-        {state.error && <p className="text-sm text-red-400">{state.error}</p>}
+        {state.error && <p className="text-sm text-fuchsia-400">{state.error}</p>}
 
         {/* 버튼 */}
         <div className="flex items-center gap-3">
