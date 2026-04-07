@@ -1,5 +1,6 @@
 import { createClient, getUser } from "@/lib/supabase/server"
 import type { PlaylistRequest } from "@/types/playlist"
+import type { SupabaseClient } from "@supabase/supabase-js"
 
 export async function fetchPlaylistRequests(
   limit?: number,
@@ -23,16 +24,9 @@ export async function fetchPlaylistRequests(
   if (!data) return []
 
   // 유저가 좋아요한 request_id Set 조회
-  let likedSet = new Set<number>()
-  if (userEmail) {
-    const { data: userLikes } = await supabase
-      .from("playlist_likes")
-      .select("request_id")
-      .eq("user_email", userEmail)
-    likedSet = new Set(
-      (userLikes ?? []).map((l: { request_id: number }) => l.request_id),
-    )
-  }
+  const likedSet = userEmail
+    ? await getUserLikedSet(supabase, userEmail)
+    : new Set<number>()
 
   return (data ?? []).map((row) => ({
     ...row,
@@ -58,14 +52,20 @@ export async function fetchPlaylistRequestById(
 
   let isLiked = false
   if (userEmail) {
-    const { data: like } = await supabase
-      .from("playlist_likes")
-      .select("id")
-      .eq("request_id", id)
-      .eq("user_email", userEmail)
-      .single()
-    isLiked = !!like
+    const likedSet = await getUserLikedSet(supabase, userEmail)
+    isLiked = likedSet.has(id)
   }
 
   return { ...data, is_liked: isLiked } as PlaylistRequest
+}
+
+async function getUserLikedSet(
+  supabase: SupabaseClient,
+  userEmail: string,
+): Promise<Set<number>> {
+  const { data } = await supabase
+    .from("playlist_likes")
+    .select("request_id")
+    .eq("user_email", userEmail)
+  return new Set((data ?? []).map((l: { request_id: number }) => l.request_id))
 }

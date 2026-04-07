@@ -4,6 +4,12 @@ import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
+function revalidateRequestPaths(id?: number) {
+  revalidatePath("/requests")
+  revalidatePath("/")
+  if (id !== undefined) revalidatePath(`/requests/${id}`)
+}
+
 export async function submitRequest(
   _prevState: { error: string | null },
   formData: FormData,
@@ -39,8 +45,7 @@ export async function submitRequest(
     return { error: "신청 중 오류가 발생했습니다. 다시 시도해주세요." }
   }
 
-  revalidatePath("/requests")
-  revalidatePath("/")
+  revalidateRequestPaths()
 
   return { error: null }
 }
@@ -87,9 +92,7 @@ export async function updateRequest(
     return { error: "수정 권한이 없거나 존재하지 않는 신청입니다." }
   }
 
-  revalidatePath("/requests")
-  revalidatePath("/")
-  revalidatePath(`/requests/${id}`)
+  revalidateRequestPaths(id)
 
   return { error: null }
 }
@@ -123,8 +126,7 @@ export async function toggleLike(
       .insert({ request_id: requestId, user_email: user.email })
   }
 
-  revalidatePath("/requests")
-  revalidatePath("/")
+  revalidateRequestPaths()
 
   return { error: null }
 }
