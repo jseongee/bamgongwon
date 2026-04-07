@@ -1,12 +1,9 @@
-import { createClient } from "@/lib/supabase/server"
+import { getUser } from "@/lib/supabase/server"
 import { SignInButton } from "@/components/auth/sign-in-button"
 import { SignOutButton } from "@/components/auth/sign-out-button"
 
 export async function AuthButton() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await getUser()
 
   if (user) {
     return (

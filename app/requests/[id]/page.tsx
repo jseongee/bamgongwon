@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
-import {
-  fetchPlaylistRequestById,
-  fetchUserEmail,
-} from "@/lib/supabase/queries"
+import { fetchPlaylistRequestById } from "@/lib/supabase/queries"
+import { getUser } from "@/lib/supabase/server"
 import { getStatusConfig } from "@/components/playlist/playlist-card"
 import { LikeButton } from "@/components/playlist/like-button"
 import { RequestActions } from "@/components/playlist/request-actions"
@@ -19,13 +17,14 @@ export default async function Page({
 
   if (isNaN(numericId)) notFound()
 
-  const [request, userEmail] = await Promise.all([
+  const [request, user] = await Promise.all([
     fetchPlaylistRequestById(numericId),
-    fetchUserEmail(),
+    getUser(),
   ])
 
   if (!request) notFound()
 
+  const userEmail = user?.email
   const statusConfig = getStatusConfig(request.status)
   const StatusIcon = statusConfig.icon
   const isOwner = !!userEmail && userEmail === request.requester

@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { SquarePlay } from "lucide-react"
-import { createClient } from "@/lib/supabase/server"
+import { getUser } from "@/lib/supabase/server"
 import { RequestButton } from "@/components/layout/request-button"
 
 export async function HeroSection() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await getUser()
 
   return (
     <section className="relative overflow-hidden border-b border-border/50 py-20 sm:py-28">

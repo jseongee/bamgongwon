@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+import { createClient, getUser } from "@/lib/supabase/server"
 import type { PlaylistRequest } from "@/types/playlist"
 
 export async function fetchPlaylistRequests(
@@ -7,9 +7,7 @@ export async function fetchPlaylistRequests(
   const supabase = await createClient()
 
   // 현재 사용자 조회 (좋아요 여부 판단용)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await getUser()
   const userEmail = user?.email
 
   let query = supabase
@@ -47,9 +45,7 @@ export async function fetchPlaylistRequestById(
 ): Promise<PlaylistRequest | null> {
   const supabase = await createClient()
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await getUser()
   const userEmail = user?.email
 
   const { data, error } = await supabase
@@ -72,12 +68,4 @@ export async function fetchPlaylistRequestById(
   }
 
   return { ...data, is_liked: isLiked } as PlaylistRequest
-}
-
-export async function fetchUserEmail(): Promise<string | null> {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  return user?.email ?? null
 }
