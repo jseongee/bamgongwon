@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { flushSync } from "react-dom"
 import { cn } from "@/lib/utils"
 import { type Status, type PlaylistRequest } from "@/types/playlist"
 import { PlaylistCard } from "@/components/playlist/playlist-card"
@@ -17,6 +18,16 @@ export function PlaylistBoard({
 
   const filteredRequests =
     filter === "all" ? requests : requests.filter((r) => r.status === filter)
+
+  const handleFilterChange = (newFilter: Status | "all") => {
+    if (!document.startViewTransition) {
+      setFilter(newFilter)
+      return
+    }
+    document.startViewTransition(() => {
+      flushSync(() => setFilter(newFilter))
+    })
+  }
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -36,7 +47,7 @@ export function PlaylistBoard({
           ).map((f) => (
             <button
               key={f}
-              onClick={() => setFilter(f)}
+              onClick={() => handleFilterChange(f)}
               className={cn(
                 "rounded-md px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap",
                 filter === f

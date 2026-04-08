@@ -17,7 +17,10 @@ export function PlaylistCard({
   const isOwner = !!userEmail && userEmail === request.requester
 
   return (
-    <div className="group relative flex flex-col gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-border/80 hover:bg-card/80 hover:scale-[1.01] hover:shadow-glow-sm">
+    <div
+      style={{ viewTransitionName: `card-${request.id}` }}
+      className="group relative flex flex-col gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-border/80 hover:bg-card/80 hover:scale-[1.01] hover:shadow-glow-sm"
+    >
       {/* 상단: 상태 뱃지 + 좋아요 */}
       <div className="flex items-center justify-between">
         <span
@@ -77,4 +80,3 @@ export function PlaylistCard({
     </div>
   )
 }
-

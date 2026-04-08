@@ -173,3 +173,15 @@
 @utility text-glow {
   text-shadow: 0 0 40px color-mix(in oklch, var(--primary) 55%, transparent);
 }
+
+/* 필터 변경 시 전체 화면 크로스페이드 비활성화 (카드 개별 애니메이션만 적용) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+/* 카드 이동 애니메이션 타이밍 */
+::view-transition-group(*) {
+  animation-duration: 0.25s;
+  animation-timing-function: ease;
+}
