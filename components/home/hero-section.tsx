@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { SquarePlay } from "lucide-react"
 import { getUser } from "@/lib/supabase/server"
 import { RequestButton } from "@/components/home/request-button"
+import { YOUTUBE_URL } from "@/constants/site-config"
 
 export async function HeroSection() {
   const user = await getUser()
@@ -46,7 +47,7 @@ export async function HeroSection() {
             <RequestButton isLoggedIn={!!user} />
             <Button asChild size="lg" variant="outline" className="gap-2 px-6">
               <a
-                href="http://youtube.com/@밤공원?sub_confirmation=1"
+                href={YOUTUBE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
