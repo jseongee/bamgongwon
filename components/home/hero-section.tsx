@@ -12,9 +12,9 @@ export async function HeroSection() {
       {/* 배경 글로우 오브 */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {/* 메인 퍼플 오브 */}
-        <div className="absolute left-1/2 top-1/2 size-160 rounded-full bg-primary/8 blur-[130px] animate-orb" />
+        <div className="absolute left-1/2 top-1/2 size-160 rounded-full bg-primary/15 blur-[130px] animate-orb" />
         {/* 보조 핑크-마젠타 오브 */}
-        <div className="absolute left-[38%] top-[45%] size-100 rounded-full bg-accent/12 blur-[100px] animate-orb-alt" />
+        <div className="absolute left-[38%] top-[45%] size-100 rounded-full bg-accent/18 blur-[100px] animate-orb-alt" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 text-center">
