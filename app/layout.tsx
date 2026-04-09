@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import NextTopLoader from "nextjs-toploader"
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,6 +64,7 @@ export default function Layout({
           {children}
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
