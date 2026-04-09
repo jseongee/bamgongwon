@@ -15,9 +15,15 @@ export function PlaylistBoard({
   userEmail?: string
 }) {
   const [filter, setFilter] = useState<Status | "all">("all")
+  const [sort, setSort] = useState<"latest" | "popular">("latest")
 
-  const filteredRequests =
+  const filteredRequests = (
     filter === "all" ? requests : requests.filter((r) => r.status === filter)
+  ).sort((a, b) =>
+    sort === "latest"
+      ? new Date(b.requested_at).getTime() - new Date(a.requested_at).getTime()
+      : b.likes_count - a.likes_count,
+  )
 
   const handleFilterChange = (newFilter: Status | "all") => {
     if (!document.startViewTransition) {
@@ -26,6 +32,16 @@ export function PlaylistBoard({
     }
     document.startViewTransition(() => {
       flushSync(() => setFilter(newFilter))
+    })
+  }
+
+  const handleSortChange = (newSort: "latest" | "popular") => {
+    if (!document.startViewTransition) {
+      setSort(newSort)
+      return
+    }
+    document.startViewTransition(() => {
+      flushSync(() => setSort(newSort))
     })
   }
 
@@ -40,24 +56,45 @@ export function PlaylistBoard({
           </p>
         </div>
 
-        {/* 필터 탭 */}
-        <div className="flex items-center gap-1.5 rounded-lg border border-border bg-muted/30 p-1 w-fit">
-          {(
-            ["all", "pending", "adopted", "in_progress", "completed"] as const
-          ).map((f) => (
-            <button
-              key={f}
-              onClick={() => handleFilterChange(f)}
-              className={cn(
-                "rounded-md px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap cursor-pointer",
-                filter === f
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {f === "all" ? "전체" : getStatusConfig(f).label}
-            </button>
-          ))}
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+          {/* 정렬 토글 */}
+          <div className="flex items-center gap-1.5 rounded-lg border border-border bg-muted/30 p-1 w-fit">
+            {(["latest", "popular"] as const).map((s) => (
+              <button
+                key={s}
+                onClick={() => handleSortChange(s)}
+                className={cn(
+                  "rounded-md px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap cursor-pointer",
+                  sort === s
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {s === "latest" ? "최신순" : "좋아요순"}
+              </button>
+            ))}
+          </div>
+          {/* 필터 탭 */}
+          <div className="overflow-x-auto">
+            <div className="flex items-center gap-1.5 rounded-lg border border-border bg-muted/30 p-1 w-fit">
+              {(
+                ["all", "pending", "adopted", "in_progress", "completed"] as const
+              ).map((f) => (
+                <button
+                  key={f}
+                  onClick={() => handleFilterChange(f)}
+                  className={cn(
+                    "rounded-md px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap cursor-pointer",
+                    filter === f
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  {f === "all" ? "전체" : getStatusConfig(f).label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
