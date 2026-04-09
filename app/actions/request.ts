@@ -80,7 +80,7 @@ export async function updateRequest(
 
   const { data, error } = await supabase
     .from("playlist_requests")
-    .update({ title, description })
+    .update({ title, description, updated_at: new Date().toISOString() })
     .eq("id", id)
     .eq("requester", user.email)
     .select()

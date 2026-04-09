@@ -6,6 +6,22 @@ import { getUser } from "@/lib/supabase/server"
 import { getStatusConfig } from "@/constants/status-config"
 import { LikeButton } from "@/components/playlist/like-button"
 import { RequestActions } from "@/components/playlist/request-actions"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+function formatDateTime(iso: string) {
+  return new Date(iso).toLocaleString("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  })
+}
 
 export default async function Page({
   params,
@@ -81,13 +97,21 @@ export default async function Page({
                 initialDescription={request.description}
               />
             )}
-            <span className="text-xs text-muted-foreground">
-              {new Date(request.requested_at).toLocaleDateString("ko-KR", {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-              })}
-            </span>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <span>{formatDateTime(request.requested_at)}</span>
+              {request.updated_at && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span className="cursor-default">(수정됨)</span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>수정: {formatDateTime(request.updated_at)}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </div>
           </div>
         </div>
 
