@@ -1,6 +1,6 @@
 "use client"
 
-import { useOptimistic, useTransition } from "react"
+import { useOptimistic, useTransition, useState } from "react"
 import { Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toggleLike } from "@/app/actions/request"
@@ -10,6 +10,7 @@ interface LikeButtonProps {
   initialCount: number
   initialLiked: boolean
   isLoggedIn: boolean
+  isOwner?: boolean
 }
 
 export function LikeButton({
@@ -17,6 +18,7 @@ export function LikeButton({
   initialCount,
   initialLiked,
   isLoggedIn,
+  isOwner,
 }: LikeButtonProps) {
   const [optimistic, setOptimistic] = useOptimistic(
     { count: initialCount, liked: initialLiked },
@@ -26,13 +28,49 @@ export function LikeButton({
     }),
   )
   const [isPending, startTransition] = useTransition()
+  const [showMsg, setShowMsg] = useState(false)
+
+  if (isOwner) {
+    return (
+      <div className="relative">
+        <button
+          onClick={() => {
+            setShowMsg(true)
+            setTimeout(() => setShowMsg(false), 2000)
+          }}
+          className="flex items-center gap-1 text-xs text-muted-foreground cursor-not-allowed"
+        >
+          <Heart className="size-3" />
+          {optimistic.count}
+        </button>
+        {showMsg && (
+          <div className="absolute right-0 top-full mt-1 z-10 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md">
+            내 글에는 좋아요를 누를 수 없어요!
+          </div>
+        )}
+      </div>
+    )
+  }
 
   if (!isLoggedIn) {
     return (
-      <span className="flex items-center gap-1 text-xs text-muted-foreground">
-        <Heart className="size-3" />
-        {optimistic.count}
-      </span>
+      <div className="relative">
+        <button
+          onClick={() => {
+            setShowMsg(true)
+            setTimeout(() => setShowMsg(false), 3000)
+          }}
+          className="flex items-center gap-1 text-xs text-muted-foreground cursor-pointer"
+        >
+          <Heart className="size-3" />
+          {optimistic.count}
+        </button>
+        {showMsg && (
+          <div className="absolute right-0 top-full mt-1 z-10 whitespace-nowrap rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md">
+            좋아요를 누르려면 로그인이 필요해요!
+          </div>
+        )}
+      </div>
     )
   }
 

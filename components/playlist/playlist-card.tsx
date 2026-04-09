@@ -37,6 +37,7 @@ export function PlaylistCard({
           initialCount={request.likes_count}
           initialLiked={request.is_liked}
           isLoggedIn={!!userEmail && userEmail !== request.requester}
+          isOwner={isOwner}
         />
       </div>
 
