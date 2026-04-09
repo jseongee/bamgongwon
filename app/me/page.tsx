@@ -4,7 +4,7 @@ import {
   fetchUserPlaylistRequests,
   fetchUserLikedRequests,
 } from "@/lib/supabase/queries"
-import { MyBoard } from "@/components/playlist/my-board"
+import { MyBoard } from "@/components/me/my-board"
 
 export default async function MePage() {
   const user = await getUser()

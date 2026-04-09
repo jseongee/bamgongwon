@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { type PlaylistRequest } from "@/types/playlist"
-import { getStatusConfig } from "@/lib/status-config"
+import { getStatusConfig } from "@/constants/status-config"
 import { RequestActions } from "@/components/playlist/request-actions"
 import { LikeButton } from "@/components/playlist/like-button"
 

@@ -1,6 +1,6 @@
 import { fetchPlaylistRequests } from "@/lib/supabase/queries"
 import { getUser } from "@/lib/supabase/server"
-import { HeroSection } from "@/components/layout/hero-section"
+import { HeroSection } from "@/components/home/hero-section"
 import { PlaylistPreview } from "@/components/playlist/playlist-preview"
 
 const PREVIEW_LIMIT = 3

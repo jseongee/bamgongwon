@@ -55,7 +55,8 @@ export function LikeButton({
       <Heart
         className={cn(
           "size-3 transition-all duration-200",
-          optimistic.liked && "fill-current drop-shadow-[0_0_6px_oklch(0.65_0.28_320_/_0.9)]",
+          optimistic.liked &&
+            "fill-current drop-shadow-[0_0_6px_oklch(0.65_0.28_320/0.9)]",
         )}
       />
       {optimistic.count}

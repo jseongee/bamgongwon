@@ -40,10 +40,13 @@ app/                    # 페이지 및 라우트 핸들러
 ├── requests/[id]/      # 신청 상세 페이지 (page.tsx, not-found.tsx)
 components/
 ├── auth/               # 인증 관련
-├── layout/             # 레이아웃
+├── home/               # 홈 페이지 전용
+├── layout/             # 공통 레이아웃
+├── me/                 # 내 활동 페이지 전용
 ├── playlist/           # 플레이리스트 관련
 ├── theme/              # 테마
 └── ui/                 # shadcn/ui 기본 컴포넌트
+constants/              # 상수 및 설정
 lib/
 ├── auth.ts             # Google OAuth 로그인 유틸
 └── supabase/           # Supabase 클라이언트 및 유틸

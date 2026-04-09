@@ -5,7 +5,7 @@ import { flushSync } from "react-dom"
 import { cn } from "@/lib/utils"
 import { type Status, type PlaylistRequest } from "@/types/playlist"
 import { PlaylistCard } from "@/components/playlist/playlist-card"
-import { getStatusConfig } from "@/lib/status-config"
+import { getStatusConfig } from "@/constants/status-config"
 
 export function PlaylistBoard({
   requests,

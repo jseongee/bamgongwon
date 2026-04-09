@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { SquarePlay } from "lucide-react"
 import { getUser } from "@/lib/supabase/server"
-import { RequestButton } from "@/components/layout/request-button"
+import { RequestButton } from "@/components/home/request-button"
 
 export async function HeroSection() {
   const user = await getUser()
