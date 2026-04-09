@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import type { PlaylistRequest } from "@/types/playlist"
 import { PlaylistCard } from "@/components/playlist/playlist-card"
@@ -19,10 +20,6 @@ export function MyBoard({
   const [tab, setTab] = useState<Tab>("written")
 
   const requests = tab === "written" ? writtenRequests : likedRequests
-  const emptyMessage =
-    tab === "written"
-      ? "아직 신청한 글이 없습니다."
-      : "좋아요한 글이 없습니다."
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -59,7 +56,17 @@ export function MyBoard({
 
       {/* 카드 그리드 */}
       {requests.length === 0 ? (
-        <p className="text-sm text-muted-foreground">{emptyMessage}</p>
+        <div className="flex flex-col items-center gap-3 py-16 text-center">
+          <p className="text-sm text-muted-foreground">
+            {tab === "written" ? "아직 신청한 글이 없습니다." : "좋아요한 글이 없습니다."}
+          </p>
+          <Link
+            href={tab === "written" ? "/requests/new" : "/requests"}
+            className="text-sm font-medium underline underline-offset-4 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {tab === "written" ? "첫 번째 신청 남기기 →" : "신청 목록 둘러보기 →"}
+          </Link>
+        </div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {requests.map((request) => (
