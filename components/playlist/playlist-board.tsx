@@ -49,7 +49,7 @@ export function PlaylistBoard({
               key={f}
               onClick={() => handleFilterChange(f)}
               className={cn(
-                "rounded-md px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap",
+                "rounded-md px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap cursor-pointer",
                 filter === f
                   ? "bg-background text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground",

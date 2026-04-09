@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { getUser } from "@/lib/supabase/server"
 import { SignInButton } from "@/components/auth/sign-in-button"
 import { SignOutButton } from "@/components/auth/sign-out-button"
@@ -8,7 +9,12 @@ export async function AuthButton() {
   if (user) {
     return (
       <div className="flex items-center gap-2">
-        <span className="text-xs text-muted-foreground">{user.email}</span>
+        <Link
+          href="/me"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+        >
+          내 활동
+        </Link>
         <SignOutButton />
       </div>
     )

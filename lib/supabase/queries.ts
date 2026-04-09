@@ -59,6 +59,56 @@ export async function fetchPlaylistRequestById(
   return { ...data, is_liked: isLiked } as PlaylistRequest
 }
 
+export async function fetchUserPlaylistRequests(
+  userEmail: string,
+): Promise<PlaylistRequest[]> {
+  const supabase = await createClient()
+
+  const { data } = await supabase
+    .from("playlist_requests")
+    .select("*")
+    .eq("requester", userEmail)
+    .order("requested_at", { ascending: false })
+
+  if (!data) return []
+
+  const likedSet = await getUserLikedSet(supabase, userEmail)
+
+  return data.map((row) => ({
+    ...row,
+    is_liked: likedSet.has(row.id),
+  })) as PlaylistRequest[]
+}
+
+export async function fetchUserLikedRequests(
+  userEmail: string,
+): Promise<PlaylistRequest[]> {
+  const supabase = await createClient()
+
+  // 좋아요한 request_id 목록 조회
+  const { data: likes } = await supabase
+    .from("playlist_likes")
+    .select("request_id")
+    .eq("user_email", userEmail)
+
+  if (!likes || likes.length === 0) return []
+
+  const requestIds = likes.map((l: { request_id: number }) => l.request_id)
+
+  const { data } = await supabase
+    .from("playlist_requests")
+    .select("*")
+    .in("id", requestIds)
+    .order("requested_at", { ascending: false })
+
+  if (!data) return []
+
+  return data.map((row) => ({
+    ...row,
+    is_liked: true,
+  })) as PlaylistRequest[]
+}
+
 async function getUserLikedSet(
   supabase: SupabaseClient,
   userEmail: string,

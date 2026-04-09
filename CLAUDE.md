@@ -12,6 +12,7 @@
 - Google OAuth 로그인 (Supabase Auth)
 - 로그인한 사용자만 신청 폼 접근 가능 (`/requests/new`)
 - 신청 건 좋아요/취소 (로그인 필요, 본인 신청 건 제외)
+- 내가 쓴 글 / 좋아요한 글 조회 (`/me`, 로그인 필요)
 
 ## 기술 스택
 - **Next.js 16** (App Router) — `proxy.ts`가 미들웨어 역할 (Next.js 16 명칭 변경)
@@ -28,24 +29,26 @@
 | `/requests` | 전체 신청 목록 (필터 탭 포함) |
 | `/requests/[id]` | 신청 상세 페이지 (전체 내용, 좋아요, 수정/삭제) |
 | `/requests/new` | 플레이리스트 신청 폼 (로그인 필요, 미로그인 시 `/` 리다이렉트) |
+| `/me` | 내가 쓴 글 / 좋아요한 글 (로그인 필요, 미로그인 시 `/` 리다이렉트) |
 | `/auth/callback` | Google OAuth 콜백 처리 (`?next=` 파라미터로 로그인 후 이동 경로 지정 가능) |
 
 ## 폴더 구조
 ```
 app/                    # 페이지 및 라우트 핸들러
 ├── actions/            # Server Actions (request.ts)
+├── me/                 # 내 활동 페이지 (page.tsx)
 ├── requests/[id]/      # 신청 상세 페이지 (page.tsx, not-found.tsx)
 components/
-├── auth/               # 인증 관련 (auth-button, sign-in-button, sign-out-button)
-├── layout/             # 레이아웃 (header, footer, hero-section, request-button)
-├── playlist/           # 플레이리스트 (playlist-board, playlist-card, playlist-preview, request-form, request-actions, request-edit-dialog, request-delete-dialog, like-button)
-├── theme/              # 테마 (theme-provider, theme-toggle)
+├── auth/               # 인증 관련
+├── layout/             # 레이아웃
+├── playlist/           # 플레이리스트 관련
+├── theme/              # 테마
 └── ui/                 # shadcn/ui 기본 컴포넌트
 lib/
-├── auth.ts             # Google OAuth 로그인 유틸 (signInWithGoogle)
+├── auth.ts             # Google OAuth 로그인 유틸
 └── supabase/           # Supabase 클라이언트 및 유틸
     ├── client.ts       # 브라우저 클라이언트
     ├── server.ts       # 서버 클라이언트
-    └── queries.ts      # DB 조회 함수 (fetchPlaylistRequests, fetchPlaylistRequestById)
+    └── queries.ts      # DB 조회 함수
 types/                  # TypeScript 타입 정의
 ```
