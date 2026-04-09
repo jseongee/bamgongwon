@@ -50,7 +50,7 @@ export function PlaylistBoard({
       {/* 섹션 헤더 */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight">신청 현황</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">신청 목록</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             총 {requests.length}개의 신청이 있습니다.
           </p>
@@ -78,7 +78,13 @@ export function PlaylistBoard({
           <div className="overflow-x-auto">
             <div className="flex items-center gap-1.5 rounded-lg border border-border bg-muted/30 p-1 w-fit">
               {(
-                ["all", "pending", "adopted", "in_progress", "completed"] as const
+                [
+                  "all",
+                  "pending",
+                  "adopted",
+                  "in_progress",
+                  "completed",
+                ] as const
               ).map((f) => (
                 <button
                   key={f}

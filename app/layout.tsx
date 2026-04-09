@@ -17,8 +17,26 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "밤공원",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  ),
+  title: {
+    default: "밤공원",
+    template: "%s | 밤공원",
+  },
   description: "플레이리스트를 신청하고 제작 현황을 확인하세요.",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    siteName: "밤공원",
+    title: { default: "밤공원", template: "%s | 밤공원" },
+    description: "플레이리스트를 신청하고 제작 현황을 확인하세요.",
+  },
+  twitter: {
+    card: "summary",
+    title: { default: "밤공원", template: "%s | 밤공원" },
+    description: "플레이리스트를 신청하고 제작 현황을 확인하세요.",
+  },
 }
 
 export default function Layout({

@@ -1,6 +1,8 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ChevronLeft, SquarePlay } from "lucide-react"
+import { cache } from "react"
 import { fetchPlaylistRequestById } from "@/lib/supabase/queries"
 import { getUser } from "@/lib/supabase/server"
 import { getStatusConfig } from "@/constants/status-config"
@@ -12,6 +14,42 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+
+// 요청 범위 내 캐싱 — generateMetadata와 Page가 DB 중복 호출 없이 공유
+const getRequest = cache((id: number) => fetchPlaylistRequestById(id))
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const numericId = Number(id)
+
+  if (isNaN(numericId)) return { title: "신청 상세" }
+
+  const request = await getRequest(numericId)
+  if (!request) return { title: "신청을 찾을 수 없습니다." }
+
+  const desc =
+    request.description.length > 160
+      ? request.description.slice(0, 157) + "..."
+      : request.description
+
+  return {
+    title: request.title,
+    description: desc,
+    openGraph: {
+      title: request.title,
+      description: desc,
+      url: `/requests/${request.id}`,
+    },
+    twitter: {
+      title: request.title,
+      description: desc,
+    },
+  }
+}
 
 function formatDateTime(iso: string) {
   return new Date(iso).toLocaleString("ko-KR", {
@@ -33,10 +71,7 @@ export default async function Page({
 
   if (isNaN(numericId)) notFound()
 
-  const [request, user] = await Promise.all([
-    fetchPlaylistRequestById(numericId),
-    getUser(),
-  ])
+  const [request, user] = await Promise.all([getRequest(numericId), getUser()])
 
   if (!request) notFound()
 

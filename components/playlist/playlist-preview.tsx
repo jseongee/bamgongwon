@@ -15,7 +15,7 @@ export function PlaylistPreview({
       {/* 섹션 헤더 */}
       <div className="mb-8 flex items-end justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight">신청 현황</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">신청 목록</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             최근 신청 {requests.length}건
           </p>

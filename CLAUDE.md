@@ -39,6 +39,8 @@ app/                    # 페이지 및 라우트 핸들러
 ├── actions/            # Server Actions (request.ts)
 ├── me/                 # 내 활동 페이지 (page.tsx)
 ├── requests/[id]/      # 신청 상세 페이지 (page.tsx, not-found.tsx)
+├── robots.ts           # robots.txt 자동 생성 (Next.js App Router)
+├── sitemap.ts          # sitemap.xml 자동 생성 — 정적 라우트 + DB 동적 라우트 포함
 components/
 ├── auth/               # 인증 관련
 ├── home/               # 홈 페이지 전용
