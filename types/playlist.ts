@@ -9,4 +9,5 @@ export interface PlaylistRequest {
   status: Status
   likes_count: number
   is_liked: boolean
+  youtube_url?: string | null
 }

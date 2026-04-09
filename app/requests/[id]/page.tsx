@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, SquarePlay } from "lucide-react"
 import { fetchPlaylistRequestById } from "@/lib/supabase/queries"
 import { getUser } from "@/lib/supabase/server"
 import { getStatusConfig } from "@/constants/status-config"
@@ -94,6 +94,19 @@ export default async function Page({
         <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
           {request.description}
         </p>
+
+        {/* YouTube 링크 — 제작 완료 상태이고 URL이 있을 때만 표시 */}
+        {request.status === "completed" && request.youtube_url && (
+          <a
+            href={request.youtube_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+          >
+            <SquarePlay className="size-4 text-red-500" />
+            YouTube에서 보기
+          </a>
+        )}
       </article>
     </main>
   )
