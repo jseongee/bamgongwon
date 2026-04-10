@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     description: "플레이리스트를 신청하고 제작 현황을 확인하세요.",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: { default: "밤공원", template: "%s | 밤공원" },
     description: "플레이리스트를 신청하고 제작 현황을 확인하세요.",
   },
