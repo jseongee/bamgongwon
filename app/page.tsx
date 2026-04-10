@@ -1,20 +1,20 @@
-import { fetchPlaylistRequests } from "@/lib/supabase/queries"
+import { Suspense } from "react"
 import { getUser } from "@/lib/supabase/server"
 import { HeroSection } from "@/components/home/hero-section"
-import { PlaylistPreview } from "@/components/playlist/playlist-preview"
+import { PlaylistSkeleton } from "@/components/playlist/playlist-skeleton"
+import { PlaylistPreviewSection } from "@/components/playlist/playlist-preview-section"
 
 const PREVIEW_LIMIT = 3
 
 export default async function Page() {
-  const [requests, user] = await Promise.all([
-    fetchPlaylistRequests(PREVIEW_LIMIT),
-    getUser(),
-  ])
+  const user = await getUser()
 
   return (
     <main>
-      <HeroSection />
-      <PlaylistPreview requests={requests} userEmail={user?.email} />
+      <HeroSection isLoggedIn={!!user} />
+      <Suspense fallback={<PlaylistSkeleton count={PREVIEW_LIMIT} />}>
+        <PlaylistPreviewSection limit={PREVIEW_LIMIT} userEmail={user?.email} />
+      </Suspense>
     </main>
   )
 }

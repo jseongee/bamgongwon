@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
-import { fetchPlaylistRequests } from "@/lib/supabase/queries"
-import { getUser } from "@/lib/supabase/server"
-import { PlaylistBoard } from "@/components/playlist/playlist-board"
+import { Suspense } from "react"
+import { PlaylistSkeleton } from "@/components/playlist/playlist-skeleton"
+import { PlaylistBoardSection } from "@/components/playlist/playlist-board-section"
 
 export const metadata: Metadata = {
   title: "신청 목록",
@@ -9,15 +9,12 @@ export const metadata: Metadata = {
     "밤공원에 신청된 모든 플레이리스트 목록을 확인하고 좋아요를 눌러보세요.",
 }
 
-export default async function Page() {
-  const [requests, user] = await Promise.all([
-    fetchPlaylistRequests(),
-    getUser(),
-  ])
-
+export default function Page() {
   return (
     <main>
-      <PlaylistBoard requests={requests} userEmail={user?.email} />
+      <Suspense fallback={<PlaylistSkeleton count={6} showFilters />}>
+        <PlaylistBoardSection />
+      </Suspense>
     </main>
   )
 }

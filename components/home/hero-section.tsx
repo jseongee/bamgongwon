@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { SquarePlay } from "lucide-react"
-import { getUser } from "@/lib/supabase/server"
 import { RequestButton } from "@/components/home/request-button"
 import { YOUTUBE_URL } from "@/constants/site-config"
 
-export async function HeroSection() {
-  const user = await getUser()
-
+export function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <section className="relative overflow-hidden border-b border-border/50 py-20 sm:py-28">
       {/* 배경 글로우 오브 */}
@@ -44,7 +41,7 @@ export async function HeroSection() {
         {/* CTA 버튼 */}
         <div className="mt-8 flex flex-col items-center gap-3">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <RequestButton isLoggedIn={!!user} />
+            <RequestButton isLoggedIn={isLoggedIn} />
             <Button asChild size="lg" variant="outline" className="gap-2 px-6">
               <a
                 href={YOUTUBE_URL}
@@ -56,7 +53,7 @@ export async function HeroSection() {
               </a>
             </Button>
           </div>
-          {!user && (
+          {!isLoggedIn && (
             <p className="text-xs text-muted-foreground">
               * 구글 로그인 후 신청 가능합니다.
             </p>
