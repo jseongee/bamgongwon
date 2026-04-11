@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import type { PlaylistRequest } from "@/types/playlist"
-import { PlaylistCard } from "@/components/playlist/playlist-card"
+import { PlaylistCard } from "@/components/requests/playlist-card"
 
 type Tab = "written" | "liked"
 

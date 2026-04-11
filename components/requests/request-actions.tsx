@@ -1,7 +1,7 @@
 "use client"
 
-import { RequestEditDialog } from "@/components/playlist/request-edit-dialog"
-import { RequestDeleteDialog } from "@/components/playlist/request-delete-dialog"
+import { RequestEditDialog } from "./request-edit-dialog"
+import { RequestDeleteDialog } from "./request-delete-dialog"
 
 interface RequestActionsProps {
   requestId: number

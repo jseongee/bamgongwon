@@ -35,26 +35,30 @@ YouTube 플레이리스트 채널의 시청자 대상 신청 관리 사이트.
 ## 폴더 구조
 
 ```
-app/                    # 페이지 및 라우트 핸들러
-├── actions/            # Server Actions (request.ts)
-├── me/                 # 내 활동 페이지 (page.tsx)
-├── requests/[id]/      # 신청 상세 페이지 (page.tsx, not-found.tsx)
-├── robots.ts           # robots.txt 자동 생성 (Next.js App Router)
-├── sitemap.ts          # sitemap.xml 자동 생성 — 정적 라우트 + DB 동적 라우트 포함
+app/                        # 페이지 및 라우트 핸들러
+├── _actions/               # Server Actions — private folder (URL 노출 방지)
+├── _components/            # 홈(/) 전용 컴포넌트 — private folder
+├── me/                     # 내 활동 페이지
+│   └── _components/        # /me 전용 컴포넌트
+├── requests/               # 신청 목록 페이지
+│   ├── _components/        # /requests 전용 컴포넌트
+│   ├── new/                # 신청 폼 페이지
+│   │   └── _components/    # /requests/new 전용 컴포넌트
+│   └── [id]/               # 신청 상세 페이지
+├── robots.ts               # robots.txt 자동 생성
+└── sitemap.ts              # sitemap.xml 자동 생성
 components/
-├── auth/               # 인증 관련
-├── home/               # 홈 페이지 전용
-├── layout/             # 공통 레이아웃
-├── me/                 # 내 활동 페이지 전용
-├── playlist/           # 플레이리스트 관련
-├── theme/              # 테마
-└── ui/                 # shadcn/ui 기본 컴포넌트
-constants/              # 상수 및 설정
+├── auth/                   # 인증 관련 (앱 전역 공유)
+├── layout/                 # 공통 레이아웃 (앱 전역 공유)
+├── requests/               # 여러 라우트에서 공유되는 신청 관련 컴포넌트
+├── theme/                  # 테마 (앱 전역 공유)
+└── ui/                     # shadcn/ui 기본 컴포넌트
+constants/                  # 상수 및 설정
 lib/
-├── auth.ts             # Google OAuth 로그인 유틸
-└── supabase/           # Supabase 클라이언트 및 유틸
-    ├── client.ts       # 브라우저 클라이언트
-    ├── server.ts       # 서버 클라이언트
-    └── queries.ts      # DB 조회 함수
-types/                  # TypeScript 타입 정의
+├── auth.ts                 # Google OAuth 로그인 유틸
+└── supabase/               # Supabase 클라이언트 및 유틸
+    ├── client.ts           # 브라우저 클라이언트
+    ├── server.ts           # 서버 클라이언트
+    └── queries.ts          # DB 조회 함수
+types/                      # TypeScript 타입 정의
 ```

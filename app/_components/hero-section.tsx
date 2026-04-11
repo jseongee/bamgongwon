@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { SquarePlay } from "lucide-react"
-import { RequestButton } from "@/components/home/request-button"
+import { RequestButton } from "./request-button"
 import { YOUTUBE_URL } from "@/constants/site-config"
 
 export function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {

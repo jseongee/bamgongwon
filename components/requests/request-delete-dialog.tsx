@@ -4,7 +4,7 @@ import { useState } from "react"
 import { AlertDialog } from "radix-ui"
 import { Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { deleteRequest } from "@/app/actions/request"
+import { deleteRequest } from "@/app/_actions/request"
 
 interface RequestDeleteDialogProps {
   requestId: number

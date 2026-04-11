@@ -3,7 +3,7 @@
 import { useOptimistic, useTransition, useState } from "react"
 import { Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { toggleLike } from "@/app/actions/request"
+import { toggleLike } from "@/app/_actions/request"
 
 interface LikeButtonProps {
   requestId: number

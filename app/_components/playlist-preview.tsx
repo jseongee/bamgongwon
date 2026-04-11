@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import { type PlaylistRequest } from "@/types/playlist"
-import { PlaylistCard } from "@/components/playlist/playlist-card"
+import { PlaylistCard } from "@/components/requests/playlist-card"
 
 export function PlaylistPreview({
   requests,

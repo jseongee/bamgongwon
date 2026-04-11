@@ -1,5 +1,5 @@
 import { fetchPlaylistRequests } from "@/lib/supabase/queries"
-import { PlaylistPreview } from "@/components/playlist/playlist-preview"
+import { PlaylistPreview } from "./playlist-preview"
 
 export async function PlaylistPreviewSection({
   limit,

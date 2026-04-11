@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { RequestForm } from "@/components/playlist/request-form"
+import { RequestForm } from "./_components/request-form"
 
 export const metadata: Metadata = {
   title: "플레이리스트 신청",

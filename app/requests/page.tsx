@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { PlaylistSkeleton } from "@/components/playlist/playlist-skeleton"
-import { PlaylistBoardSection } from "@/components/playlist/playlist-board-section"
+import { PlaylistSkeleton } from "@/components/requests/playlist-skeleton"
+import { PlaylistBoardSection } from "./_components/playlist-board-section"
 
 export const metadata: Metadata = {
   title: "신청 목록",

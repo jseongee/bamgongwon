@@ -6,8 +6,8 @@ import { cache } from "react"
 import { fetchPlaylistRequestById } from "@/lib/supabase/queries"
 import { getUser } from "@/lib/supabase/server"
 import { getStatusConfig } from "@/constants/status-config"
-import { LikeButton } from "@/components/playlist/like-button"
-import { RequestActions } from "@/components/playlist/request-actions"
+import { LikeButton } from "@/components/requests/like-button"
+import { RequestActions } from "@/components/requests/request-actions"
 import {
   Tooltip,
   TooltipContent,

@@ -1,8 +1,8 @@
 import { Suspense } from "react"
 import { getUser } from "@/lib/supabase/server"
-import { HeroSection } from "@/components/home/hero-section"
-import { PlaylistSkeleton } from "@/components/playlist/playlist-skeleton"
-import { PlaylistPreviewSection } from "@/components/playlist/playlist-preview-section"
+import { HeroSection } from "./_components/hero-section"
+import { PlaylistSkeleton } from "@/components/requests/playlist-skeleton"
+import { PlaylistPreviewSection } from "./_components/playlist-preview-section"
 
 const PREVIEW_LIMIT = 3
 

@@ -4,7 +4,7 @@ import { useActionState, useState } from "react"
 import { Dialog } from "radix-ui"
 import { Pencil, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { updateRequest } from "@/app/actions/request"
+import { updateRequest } from "@/app/_actions/request"
 
 interface RequestEditDialogProps {
   requestId: number

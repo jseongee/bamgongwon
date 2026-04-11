@@ -2,8 +2,8 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { type PlaylistRequest } from "@/types/playlist"
 import { getStatusConfig } from "@/constants/status-config"
-import { RequestActions } from "@/components/playlist/request-actions"
-import { LikeButton } from "@/components/playlist/like-button"
+import { RequestActions } from "@/components/requests/request-actions"
+import { LikeButton } from "@/components/requests/like-button"
 
 export function PlaylistCard({
   request,

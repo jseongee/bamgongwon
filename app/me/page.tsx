@@ -5,7 +5,7 @@ import {
   fetchUserPlaylistRequests,
   fetchUserLikedRequests,
 } from "@/lib/supabase/queries"
-import { MyBoard } from "@/components/me/my-board"
+import { MyBoard } from "./_components/my-board"
 
 export const metadata: Metadata = {
   title: "내 활동",
