@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { submitRequest } from "@/app/actions/request"
+import { createRequest } from "@/app/actions/request"
 import { Button } from "@/components/ui/button"
 import { Info, Loader2 } from "lucide-react"
 
@@ -10,7 +10,7 @@ const initialState = { error: null }
 
 export function RequestForm() {
   const router = useRouter()
-  const [state, action, isPending] = useActionState(submitRequest, initialState)
+  const [state, action, isPending] = useActionState(createRequest, initialState)
   const hasSubmitted = useRef(false)
 
   useEffect(() => {

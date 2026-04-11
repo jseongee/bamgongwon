@@ -1,44 +1,28 @@
 "use server"
 
+import type { SupabaseClient } from "@supabase/supabase-js"
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
-function revalidateRequestPaths(id?: number) {
-  revalidatePath("/requests")
-  revalidatePath("/")
-  if (id !== undefined) revalidatePath(`/requests/${id}`)
-}
-
-export async function submitRequest(
+export async function createRequest(
   _prevState: { error: string | null },
   formData: FormData,
 ): Promise<{ error: string | null }> {
-  const supabase = await createClient()
-
-  // 서버 액션 내에서 인증 재검증 (보안 필수)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user?.email) {
+  const auth = await getAuthenticatedClient()
+  if (!auth) {
     return { error: "로그인이 필요합니다." }
   }
 
-  const title = formData.get("title")?.toString().trim()
-  const description = formData.get("description")?.toString().trim()
-
-  if (!title || title.length === 0) {
-    return { error: "제목을 입력해주세요." }
-  }
-  if (!description || description.length === 0) {
-    return { error: "내용을 입력해주세요." }
+  const fields = parseRequestFields(formData)
+  if (fields.error) {
+    return { error: fields.error }
   }
 
-  const { error } = await supabase.from("playlist_requests").insert({
-    requester: user.email,
-    title,
-    description,
+  const { error } = await auth.supabase.from("playlist_requests").insert({
+    requester: auth.email,
+    title: fields.title,
+    description: fields.description,
   })
 
   if (error) {
@@ -46,7 +30,6 @@ export async function submitRequest(
   }
 
   revalidateRequestPaths()
-
   return { error: null }
 }
 
@@ -54,35 +37,30 @@ export async function updateRequest(
   _prevState: { error: string | null },
   formData: FormData,
 ): Promise<{ error: string | null }> {
-  const supabase = await createClient()
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user?.email) {
+  const auth = await getAuthenticatedClient()
+  if (!auth) {
     return { error: "로그인이 필요합니다." }
   }
 
   const id = Number(formData.get("id"))
-  const title = formData.get("title")?.toString().trim()
-  const description = formData.get("description")?.toString().trim()
-
   if (!id) {
     return { error: "잘못된 요청입니다." }
   }
-  if (!title || title.length === 0) {
-    return { error: "제목을 입력해주세요." }
-  }
-  if (!description || description.length === 0) {
-    return { error: "내용을 입력해주세요." }
+
+  const fields = parseRequestFields(formData)
+  if (fields.error) {
+    return { error: fields.error }
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await auth.supabase
     .from("playlist_requests")
-    .update({ title, description, updated_at: new Date().toISOString() })
+    .update({
+      title: fields.title,
+      description: fields.description,
+      updated_at: new Date().toISOString(),
+    })
     .eq("id", id)
-    .eq("requester", user.email)
+    .eq("requester", auth.email)
     .select()
 
   if (error) {
@@ -93,62 +71,49 @@ export async function updateRequest(
   }
 
   revalidateRequestPaths(id)
-
   return { error: null }
 }
 
 export async function toggleLike(
   requestId: number,
 ): Promise<{ error: string | null }> {
-  const supabase = await createClient()
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user?.email) {
+  const auth = await getAuthenticatedClient()
+  if (!auth) {
     return { error: "로그인이 필요합니다." }
   }
 
-  // 이미 좋아요했는지 확인
-  const { data: existing } = await supabase
+  const { data: existing } = await auth.supabase
     .from("playlist_likes")
     .select("id")
     .eq("request_id", requestId)
-    .eq("user_email", user.email)
+    .eq("user_email", auth.email)
     .single()
 
   if (existing) {
-    await supabase.from("playlist_likes").delete().eq("id", existing.id)
+    await auth.supabase.from("playlist_likes").delete().eq("id", existing.id)
   } else {
-    await supabase
+    await auth.supabase
       .from("playlist_likes")
-      .insert({ request_id: requestId, user_email: user.email })
+      .insert({ request_id: requestId, user_email: auth.email })
   }
 
   revalidateRequestPaths()
-
   return { error: null }
 }
 
 export async function deleteRequest(
   id: number,
 ): Promise<{ error: string | null }> {
-  const supabase = await createClient()
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user?.email) {
+  const auth = await getAuthenticatedClient()
+  if (!auth) {
     return { error: "로그인이 필요합니다." }
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await auth.supabase
     .from("playlist_requests")
     .delete()
     .eq("id", id)
-    .eq("requester", user.email)
+    .eq("requester", auth.email)
     .select()
 
   if (error) {
@@ -159,4 +124,50 @@ export async function deleteRequest(
   }
 
   redirect("/requests")
+}
+
+// 인증된 Supabase 클라이언트와 사용자 이메일을 함께 반환
+// 미인증 상태라면 null을 반환
+async function getAuthenticatedClient(): Promise<{
+  supabase: SupabaseClient
+  email: string
+} | null> {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user?.email) {
+    return null
+  }
+
+  return { supabase, email: user.email }
+}
+
+// FormData에서 title과 description을 추출하고 유효성 검사
+// 유효하지 않으면 { error }를, 유효하면 { title, description } 반환
+function parseRequestFields(
+  formData: FormData,
+):
+  | { error: string; title?: never; description?: never }
+  | { error?: never; title: string; description: string } {
+  const title = formData.get("title")?.toString().trim()
+  const description = formData.get("description")?.toString().trim()
+
+  if (!title) {
+    return { error: "제목을 입력해주세요." }
+  }
+  if (!description) {
+    return { error: "내용을 입력해주세요." }
+  }
+
+  return { title, description }
+}
+
+function revalidateRequestPaths(id?: number) {
+  revalidatePath("/requests")
+  revalidatePath("/")
+  if (id !== undefined) {
+    revalidatePath(`/requests/${id}`)
+  }
 }
