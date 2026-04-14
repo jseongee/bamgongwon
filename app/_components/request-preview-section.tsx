@@ -1,7 +1,7 @@
 import { fetchPlaylistRequests } from "@/lib/supabase/queries"
-import { PlaylistPreview } from "./playlist-preview"
+import { RequestPreview } from "./request-preview"
 
-export async function PlaylistPreviewSection({
+export async function RequestPreviewSection({
   limit,
   userEmail,
 }: {
@@ -9,5 +9,5 @@ export async function PlaylistPreviewSection({
   userEmail?: string
 }) {
   const requests = await fetchPlaylistRequests(limit)
-  return <PlaylistPreview requests={requests} userEmail={userEmail} />
+  return <RequestPreview requests={requests} userEmail={userEmail} />
 }

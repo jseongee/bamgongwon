@@ -1,5 +1,5 @@
 import { createClient, getUser } from "@/lib/supabase/server"
-import type { PlaylistRequest } from "@/types/playlist"
+import type { PlaylistRequest } from "@/types/request"
 import type { SupabaseClient } from "@supabase/supabase-js"
 
 export async function fetchPlaylistRequests(

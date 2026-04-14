@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { PlaylistSkeleton } from "@/components/requests/playlist-skeleton"
-import { PlaylistBoardSection } from "./_components/playlist-board-section"
+import { RequestCardSkeleton } from "@/components/requests/request-card-skeleton"
+import { RequestBoardSection } from "./_components/request-board-section"
 
 export const metadata: Metadata = {
   title: "신청 목록",
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main>
-      <Suspense fallback={<PlaylistSkeleton count={6} showFilters />}>
-        <PlaylistBoardSection />
+      <Suspense fallback={<RequestCardSkeleton count={6} showFilters />}>
+        <RequestBoardSection />
       </Suspense>
     </main>
   )

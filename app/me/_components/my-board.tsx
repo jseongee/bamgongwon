@@ -3,8 +3,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import type { PlaylistRequest } from "@/types/playlist"
-import { PlaylistCard } from "@/components/requests/playlist-card"
+import type { PlaylistRequest } from "@/types/request"
+import { RequestCard } from "@/components/requests/request-card"
 
 type Tab = "written" | "liked"
 
@@ -70,7 +70,7 @@ export function MyBoard({
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {requests.map((request) => (
-            <PlaylistCard
+            <RequestCard
               key={request.id}
               request={request}
               userEmail={userEmail}

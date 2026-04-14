@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og"
 import { createClient } from "@/lib/supabase/server"
-import type { Status } from "@/types/playlist"
+import type { Status } from "@/types/request"
 
 export const alt = "플레이리스트 신청 상세 — 밤공원"
 export const size = { width: 1200, height: 630 }

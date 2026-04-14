@@ -1,8 +1,8 @@
 import { Suspense } from "react"
 import { getUser } from "@/lib/supabase/server"
 import { HeroSection } from "./_components/hero-section"
-import { PlaylistSkeleton } from "@/components/requests/playlist-skeleton"
-import { PlaylistPreviewSection } from "./_components/playlist-preview-section"
+import { RequestCardSkeleton } from "@/components/requests/request-card-skeleton"
+import { RequestPreviewSection } from "./_components/request-preview-section"
 
 const PREVIEW_LIMIT = 3
 
@@ -12,8 +12,8 @@ export default async function Page() {
   return (
     <main>
       <HeroSection isLoggedIn={!!user} />
-      <Suspense fallback={<PlaylistSkeleton count={PREVIEW_LIMIT} />}>
-        <PlaylistPreviewSection limit={PREVIEW_LIMIT} userEmail={user?.email} />
+      <Suspense fallback={<RequestCardSkeleton count={PREVIEW_LIMIT} />}>
+        <RequestPreviewSection limit={PREVIEW_LIMIT} userEmail={user?.email} />
       </Suspense>
     </main>
   )

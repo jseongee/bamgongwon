@@ -1,5 +1,5 @@
 import { CheckCircle2, Clock, Loader2, Star } from "lucide-react"
-import type { Status } from "@/types/playlist"
+import type { Status } from "@/types/request"
 
 export function getStatusConfig(status: Status) {
   switch (status) {

@@ -3,11 +3,11 @@
 import { useState } from "react"
 import { flushSync } from "react-dom"
 import { cn } from "@/lib/utils"
-import { type Status, type PlaylistRequest } from "@/types/playlist"
-import { PlaylistCard } from "@/components/requests/playlist-card"
+import { type Status, type PlaylistRequest } from "@/types/request"
+import { RequestCard } from "@/components/requests/request-card"
 import { getStatusConfig } from "@/constants/status-config"
 
-export function PlaylistBoard({
+export function RequestBoard({
   requests,
   userEmail,
 }: {
@@ -107,7 +107,7 @@ export function PlaylistBoard({
       {/* 카드 그리드 */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {filteredRequests.map((request) => (
-          <PlaylistCard
+          <RequestCard
             key={request.id}
             request={request}
             userEmail={userEmail}

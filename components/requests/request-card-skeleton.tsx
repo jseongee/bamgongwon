@@ -1,4 +1,4 @@
-export function PlaylistSkeleton({
+export function RequestCardSkeleton({
   count = 3,
   showFilters = false,
 }: {
