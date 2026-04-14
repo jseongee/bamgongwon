@@ -20,7 +20,6 @@ export const createClient = async () => {
 }
 
 export const getUser = cache(async () => {
-  console.log("Fetching user from Supabase...")
   const supabase = await createClient()
   const {
     data: { user },
