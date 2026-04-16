@@ -6,6 +6,7 @@ import { cache } from "react"
 import { fetchRequestById } from "@/lib/supabase/queries"
 import { getUser } from "@/lib/supabase/server"
 import { getStatusConfig } from "@/constants/status-config"
+import { formatDateTime } from "@/lib/date"
 import { LikeButton } from "@/components/requests/like-button"
 import { RequestActions } from "@/components/requests/request-actions"
 import {
@@ -49,17 +50,6 @@ export async function generateMetadata({
       description: desc,
     },
   }
-}
-
-function formatDateTime(iso: string) {
-  return new Date(iso).toLocaleString("ko-KR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "Asia/Seoul",
-  })
 }
 
 export default async function Page({

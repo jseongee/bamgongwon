@@ -4,6 +4,7 @@ import { type PlaylistRequest } from "@/types/request"
 import { getStatusConfig } from "@/constants/status-config"
 import { RequestActions } from "@/components/requests/request-actions"
 import { LikeButton } from "@/components/requests/like-button"
+import { formatDate } from "@/lib/date"
 
 export function RequestCard({
   request,
@@ -70,12 +71,7 @@ export function RequestCard({
             />
           )}
           <span className="text-xs text-muted-foreground">
-            {new Date(request.requested_at).toLocaleDateString("ko-KR", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              timeZone: "Asia/Seoul",
-            })}
+            {formatDate(request.requested_at)}
           </span>
         </div>
       </div>
