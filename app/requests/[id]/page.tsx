@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ChevronLeft, SquarePlay } from "lucide-react"
 import { cache } from "react"
-import { fetchPlaylistRequestById } from "@/lib/supabase/queries"
+import { fetchRequestById } from "@/lib/supabase/queries"
 import { getUser } from "@/lib/supabase/server"
 import { getStatusConfig } from "@/constants/status-config"
 import { LikeButton } from "@/components/requests/like-button"
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/tooltip"
 
 // 요청 범위 내 캐싱 — generateMetadata와 Page가 DB 중복 호출 없이 공유
-const getRequest = cache((id: number) => fetchPlaylistRequestById(id))
+const getRequest = cache((id: number) => fetchRequestById(id))
 
 export async function generateMetadata({
   params,

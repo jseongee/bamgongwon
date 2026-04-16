@@ -2,7 +2,7 @@ import { createClient, getUser } from "@/lib/supabase/server"
 import type { PlaylistRequest } from "@/types/request"
 import type { SupabaseClient } from "@supabase/supabase-js"
 
-export async function fetchPlaylistRequests(
+export async function fetchRequests(
   limit?: number,
 ): Promise<PlaylistRequest[]> {
   const supabase = await createClient()
@@ -34,7 +34,7 @@ export async function fetchPlaylistRequests(
   })) as PlaylistRequest[]
 }
 
-export async function fetchPlaylistRequestById(
+export async function fetchRequestById(
   id: number,
 ): Promise<PlaylistRequest | null> {
   const supabase = await createClient()
@@ -59,7 +59,7 @@ export async function fetchPlaylistRequestById(
   return { ...data, is_liked: isLiked } as PlaylistRequest
 }
 
-export async function fetchUserPlaylistRequests(
+export async function fetchUserRequests(
   userEmail: string,
 ): Promise<PlaylistRequest[]> {
   const supabase = await createClient()

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { getUser } from "@/lib/supabase/server"
 import {
-  fetchUserPlaylistRequests,
+  fetchUserRequests,
   fetchUserLikedRequests,
 } from "@/lib/supabase/queries"
 import { MyBoard } from "./_components/my-board"
@@ -18,7 +18,7 @@ export default async function MePage() {
   if (!user?.email) redirect("/")
 
   const [writtenRequests, likedRequests] = await Promise.all([
-    fetchUserPlaylistRequests(user.email),
+    fetchUserRequests(user.email),
     fetchUserLikedRequests(user.email),
   ])
 
