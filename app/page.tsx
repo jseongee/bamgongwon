@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import { getUser } from "@/lib/supabase/server"
 import { HeroSection } from "./_components/hero-section"
 import { RequestCardSkeleton } from "@/components/requests/request-card-skeleton"
-import { RequestPreviewSection } from "./_components/request-preview-section"
+import { RequestPreview } from "./_components/request-preview"
 
 const PREVIEW_LIMIT = 3
 
@@ -13,7 +13,7 @@ export default async function Page() {
     <main>
       <HeroSection isLoggedIn={!!user} />
       <Suspense fallback={<RequestCardSkeleton count={PREVIEW_LIMIT} />}>
-        <RequestPreviewSection limit={PREVIEW_LIMIT} userEmail={user?.email} />
+        <RequestPreview limit={PREVIEW_LIMIT} userEmail={user?.email} />
       </Suspense>
     </main>
   )

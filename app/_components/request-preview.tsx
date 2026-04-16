@@ -1,15 +1,17 @@
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
-import { type PlaylistRequest } from "@/types/request"
+import { fetchRequests } from "@/lib/supabase/queries"
 import { RequestCard } from "@/components/requests/request-card"
 
-export function RequestPreview({
-  requests,
+export async function RequestPreview({
+  limit,
   userEmail,
 }: {
-  requests: PlaylistRequest[]
+  limit: number
   userEmail?: string
 }) {
+  const requests = await fetchRequests(limit)
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       {/* 섹션 헤더 */}
