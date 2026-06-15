@@ -1,18 +1,18 @@
-import { CheckCircle2, Clock, Loader2, Star } from "lucide-react"
+import { CircleCheckBig, Clock, Loader2, Star } from "lucide-react"
 import type { Status } from "@/types/request"
 
 export function getStatusConfig(status: Status) {
   switch (status) {
     case "pending":
       return {
-        label: "대기 중",
+        label: "신청됨",
         icon: Clock,
         className: "text-slate-400 bg-slate-400/10 border-slate-400/20",
       }
     case "completed":
       return {
         label: "제작 완료",
-        icon: CheckCircle2,
+        icon: CircleCheckBig,
         className: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
       }
     case "in_progress":
